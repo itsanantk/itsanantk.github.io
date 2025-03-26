@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anant Khanna</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="https://kit.fontawesome.com/1567ed3ac1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Floating Particles (visible everywhere) -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Sticky Navigation -->
+  <nav>
+    <div class="container">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+      <ul>
+        <li><a href="#header">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <div id="header" data-aos="fade-in" data-aos-duration="1000">
+    <div class="container">
+      <div class="header-text" data-aos="zoom-in" data-aos-duration="1500">
+        <p>Software Engineer</p>
+        <h1>Hi, I'm <span>Anant</span></h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about">
+    <div class="container" data-aos="fade-up" data-aos-duration="1200">
+      <div class="row">
+        <div class="about-col-1" data-aos="fade-right" data-aos-duration="1200">
+          <img src="images/pfp.jpg" alt="Anant Khanna" />
+        </div>
+
+        <div class="about-col-2" data-aos="fade-left" data-aos-duration="1200">
+          <h1 class="sub-title">About me</h1>
+          <p>
+            I'm a Computer Engineering student at UBC with a passion for software development, AI/ML, and embedded systems.
+            Through hands-on experience in machine learning, robotics, and software development, I have worked on projects ranging
+            from developing AI models for autonomous object detection to designing IoT-based noise monitoring systems.
+            I have also gained industry experience through internships and leadership roles in programming education.
+          </p>
+
+          <div class="tab-titles">
+            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+            <p class="tab-links" onclick="opentab('experience')">Experience</p>
+            <p class="tab-links" onclick="opentab('education')">Education</p>
+            <p class="tab-links" onclick="opentab('resume')">Resume</p>  
+          </div>
+
+          <div class="tab-contents active-tab" id="skills">
+            <ul>
+              <li><span>Languages</span> <br> Python, C, SQL, Java, C#</li>
+              <li><span>Frameworks & Tools</span> <br> HTML, CSS, YOLO, Ultralytics, Flask, MySQL, Unity, NumPy, Matplotlib</li>
+              <li><span>Areas</span> <br> Machine Learning, IoT, Embedded Systems, Web Development</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="experience">
+            <ul>
+              <li><span>AI/ML Software Developer</span> <br> UBC UAS</li>
+              <li><span>Engineering Technician Intern</span> <br> Zoom Engineering Ltd.</li>
+              <li><span>Programming Tutor - President</span> <br> (Tutoring &amp; Competition Prep)</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="education">
+            <ul>
+              <li><span>University of British Columbia</span> <br> BASc in Engineering, Expected 2028, GPA 3.85/4.33</li>
+              <li><span>Fleetwood Park Secondary School</span> <br> GPA: 4.33/4.33</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="resume">
+            <a href="Resume - Anant Khanna.pdf" target="_blank" class="resume-button">Download Resume (PDF)</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Section -->
+  <div id="portfolio">
+    <div class="container" data-aos="fade-up" data-aos-duration="1200">
+      <h1 class="sub-title" data-aos="zoom-in" data-aos-duration="1000">Projects</h1>
+      <div class="project-list">
+
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project1')">
+          <img src="images/work-1.png" alt="AI Noise Source Prediction" />
+        </div>
+
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project2')">
+          <img src="images/work-2.png" alt="Bluetooth Tracking Robot" />
+        </div>
+
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
+          <img src="images/work-3.png" alt="Additional Project" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content" data-aos="zoom-in" data-aos-duration="1000">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modal-text"></div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" data-aos="fade-up" data-aos-duration="1200">
+    <div class="container">
+      <h1 class="contact-text" data-aos="fade-right" data-aos-duration="1000">Contact Me</h1>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/itsanantk/" target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="mailto:itsanantk@gmail.com" class="email-text">
+          <i class="fa-solid fa-envelope"></i> 
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    <p>Copyright © 2025 Anant Khanna. All Rights Reserved.</p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init();
+
+    // Tab functionality
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname) {
+      for (var tablink of tablinks) {
+        tablink.classList.remove("active-link");
+      }
+      for (var tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+      }
+      event.currentTarget.classList.add("active-link");
+      document.getElementById(tabname).classList.add("active-tab");
+    }
+
+    // Modal functionality for projects
+    function openModal(projectId) {
+      const modal = document.getElementById("project-modal");
+      const modalText = document.getElementById("modal-text");
+      if (projectId === "project1") {
+        modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
+          <p>Developed an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels. Backend built with Flask API.</p>`;
+      } else if (projectId === "project2") {
+        modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
+          <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
+      } else if (projectId === "project3") {
+        modalText.innerHTML = `<h2>Additional Project</h2>
+          <p>Details of your additional project can go here.</p>`;
+      }
+      modal.style.display = "block";
+    }
+    function closeModal() {
+      document.getElementById("project-modal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById("project-modal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    // Floating Particles Background
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    class Particle {
+        constructor(x, y, size, color, speedX, speedY) {
+            this.x = x;
+            this.y = y;
+            this.size = size;
+            this.color = color;
+            this.speedX = speedX;
+            this.speedY = speedY;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+        }
+    }
+
+
+    function getMutedColor() {
+      const hue = Math.random() * 360; // Random hue
+      const saturation = 30 + Math.random() * 20; // Saturation between 30% and 50%
+      const lightness = 40 + Math.random() * 20; // Lightness between 40% and 60%
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+
+    // Define an array with the desired colors
+    const particleColors = ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985'];
+
+    function createParticles() {
+        particles = [];
+        for (let i = 0; i < 50; i++) {
+            let size = Math.random() * 5 + 2;
+            let x = Math.random() * canvas.width;
+            let y = Math.random() * canvas.height;
+            let speedX = (Math.random() - 0.5) * 1;
+            let speedY = (Math.random() - 0.5) * 1;
+            // Randomly select a color from the particleColors array
+            let color = particleColors[Math.floor(Math.random() * particleColors.length)];
+            particles.push(new Particle(x, y, size, color, speedX, speedY));
+        }
+    }
+
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let particle of particles) {
+            particle.update();
+            particle.draw();
+        }
+        requestAnimationFrame(animateParticles);
+    }
+    createParticles();
+    animateParticles();
+  </script>
+</body>
+</html>
