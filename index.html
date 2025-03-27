@@ -101,16 +101,27 @@
       <div class="project-list">
 
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project1')">
-          <img src="images/work-1.png" alt="AI Noise Source Prediction" />
+          <div class="image-container">
+            <img src="images/work-1.png" alt="AI Noise Source Prediction">
+          </div>
+          <figcaption>AI Noise Source Prediction</figcaption>
         </div>
 
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project2')">
-          <img src="images/work-2.png" alt="Bluetooth Tracking Robot" />
+          <div class="image-container">
+            <img src="images/work-2.png" alt="Claw Machine"/>
+          </div>
+          <figcaption>APSC 101 Claw Project</figcaption>
         </div>
+        
 
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
-          <img src="images/work-3.png" alt="Additional Project" />
+          <div class="image-container">
+            <img src="images/work-3.png" alt="Bluetooth Tracking Robot" />
+          </div>
+          <figcaption>Bluetooth Tracking Robot</figcaption>
         </div>
+
       </div>
     </div>
   </div>
@@ -121,7 +132,7 @@
       <span class="close" onclick="closeModal()">&times;</span>
       <div id="modal-text"></div>
     </div>
-  </div>
+  </div>  
 
   <!-- Contact Section -->
   <div id="contact" data-aos="fade-up" data-aos-duration="1200">
@@ -165,21 +176,24 @@
     }
 
     // Modal functionality for projects
-    function openModal(projectId) {
-      const modal = document.getElementById("project-modal");
-      const modalText = document.getElementById("modal-text");
-      if (projectId === "project1") {
-        modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
-          <p>Developing an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels.</p>`;
-      } else if (projectId === "project2") {
-        modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
-          <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
-      } else if (projectId === "project3") {
-        modalText.innerHTML = `<h2>Additional Project</h2>
-          <p>Details of your additional project can go here.</p>`;
-      }
-      modal.style.display = "block";
+  function openModal(projectId) {
+    const modal = document.getElementById("project-modal");
+    const modalText = document.getElementById("modal-text");
+    if (projectId === "project1") {
+      modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
+        <p>Developed an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels. Backend built with Flask API.</p>`;
+    }  else if (projectId === "project2") {
+      modalText.innerHTML = `<h2>Claw Machine</h2>
+        <p>Designed and built a semi-autonomous claw using Arduino and servo motors as part of UBC's APSC 101 course. The claw was programmed to pick up objects of varying sizes and weights efficiently.</p>
+        <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
+    } else if (projectId === "project3") {
+      modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
+        <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
     }
+    modal.style.display = "block";
+    }
+
+    
     function closeModal() {
       document.getElementById("project-modal").style.display = "none";
     }
