@@ -250,8 +250,8 @@
             let size = Math.random() * 5 + 2;
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
-            let speedX = (Math.random() - 0.5) * 1;
-            let speedY = (Math.random() - 0.5) * 1;
+            let speedX = (Math.random() - 0.4) * 1;
+            let speedY = (Math.random() - 0.4) * 1;
             // Randomly select a color from the particleColors array
             let color = particleColors[Math.floor(Math.random() * particleColors.length)];
             particles.push(new Particle(x, y, size, color, speedX, speedY));
