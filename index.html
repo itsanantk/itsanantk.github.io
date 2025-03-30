@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script src="https://kit.fontawesome.com/1567ed3ac1.js" crossorigin="anonymous"></script>
   <link rel="icon" href="images/icon.ico" type="image/x-icon">
-
 </head>
 <body>
   <!-- Floating Particles (visible everywhere) -->
@@ -46,23 +45,20 @@
         <div class="about-col-1" data-aos="fade-right" data-aos-duration="1200">
           <img src="images/pfp.jpg" alt="Anant Khanna" />
         </div>
-
         <div class="about-col-2" data-aos="fade-left" data-aos-duration="1200">
           <h1 class="sub-title">About me</h1>
-          <p class = "description">
+          <p class="description">
             I'm an Engineering student at UBC with a passion for software development, AI/ML, and embedded systems.
             Through hands-on experience in machine learning, robotics, and software development, I have worked on projects ranging
             from developing AI models for autonomous object detection to designing IoT-based noise monitoring systems.
             I have also gained industry experience through internships and leadership roles in programming education.
           </p>
-
           <div class="tab-titles">
             <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
             <p class="tab-links" onclick="opentab('experience')">Experience</p>
             <p class="tab-links" onclick="opentab('education')">Education</p>
             <p class="tab-links" onclick="opentab('resume')">Resume</p>  
           </div>
-
           <div class="tab-contents active-tab" id="skills">
             <ul>
               <li><span>Languages</span> <br> Python, C, SQL, Java, C#</li>
@@ -70,7 +66,6 @@
               <li><span>Areas</span> <br> Machine Learning, IoT, Embedded Systems, Web Development</li>
             </ul>
           </div>
-
           <div class="tab-contents" id="experience">
             <ul>
               <li><span>AI/ML Software Developer</span> <br> UBC UAS</li>
@@ -78,17 +73,15 @@
               <li><span>Programming Tutor - President</span> <br> (Tutoring &amp; Competition Prep)</li>
             </ul>
           </div>
-
           <div class="tab-contents" id="education">
             <ul>
               <li><span>University of British Columbia</span> <br> BASc in Engineering, Expected 2028, GPA 3.85/4.33</li>
               <li><span>Fleetwood Park Secondary School</span> <br> GPA: 4.33/4.33</li>
             </ul>
           </div>
-
           <div class="tab-contents" id="resume">
             <a href="Resume - Anant Khanna.pdf" target="_blank" class="resume-button">Download Resume (PDF)</a>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,29 +92,30 @@
     <div class="container" data-aos="fade-up" data-aos-duration="1200">
       <h1 class="sub-title" data-aos="zoom-in" data-aos-duration="1000">Projects</h1>
       <div class="project-list">
-
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project1')">
           <div class="image-container">
             <img src="images/work-1.png" alt="AI Noise Source Prediction">
           </div>
           <figcaption>AI Noise Source Prediction</figcaption>
         </div>
-
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project2')">
           <div class="image-container">
             <img src="images/work-2.png" alt="Claw Machine"/>
           </div>
           <figcaption>Claw Machine</figcaption>
         </div>
-        
-
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
           <div class="image-container">
             <img src="images/work-3.png" alt="Bluetooth Tracking Robot" />
           </div>
           <figcaption>Bluetooth Tracking Robot</figcaption>
         </div>
-
+        <div class="project" data-aos="flip-left" data-aos-offset="-100" data-aos-duration="1200" onclick="openModal('project4')">
+          <div class="image-container">
+            <img src="images/game_dev.png" alt="Game Development Projects" />
+          </div>
+          <figcaption>Game Development: Cell Fusion & Blink</figcaption>
+        </div>
       </div>
     </div>
   </div>
@@ -132,7 +126,7 @@
       <span class="close" onclick="closeModal()">&times;</span>
       <div id="modal-text"></div>
     </div>
-  </div>  
+  </div>
 
   <!-- Contact Section -->
   <div id="contact" data-aos="fade-up" data-aos-duration="1200">
@@ -176,24 +170,25 @@
     }
 
     // Modal functionality for projects
-  function openModal(projectId) {
-    const modal = document.getElementById("project-modal");
-    const modalText = document.getElementById("modal-text");
-    if (projectId === "project1") {
-      modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
-        <p>Developed an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels.</p>`;
-    }  else if (projectId === "project2") {
-      modalText.innerHTML = `<h2>Claw Machine</h2>
-        <p>Designed and built a semi-autonomous claw using Arduino and servo motors as part of UBC's APSC 101 course. The claw was programmed to pick up objects of varying sizes and weights efficiently.</p>
-        <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
-    } else if (projectId === "project3") {
-      modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
-        <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
+    function openModal(projectId) {
+      const modal = document.getElementById("project-modal");
+      const modalText = document.getElementById("modal-text");
+      if (projectId === "project1") {
+        modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
+          <p>Developed an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels.</p>`;
+      } else if (projectId === "project2") {
+        modalText.innerHTML = `<h2>Claw Machine</h2>
+          <p>Designed and built a semi-autonomous claw using Arduino and servo motors as part of UBC's APSC 101 course. The claw was programmed to pick up objects of varying sizes and weights efficiently.</p>
+          <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
+      } else if (projectId === "project3") {
+        modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
+          <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
+      } else if (projectId === "project4") {
+        modalText.innerHTML = `<h2>Game Development Projects</h2>
+          <p>Developed two games during game jams: <a href="https://antgenix.itch.io/cell-fusion" target="_blank">Cell Fusion</a> (5th place out of 81 entries) and <a href="https://kasmeltz.itch.io/blink" target="_blank">Blink</a> (4th place out of 86 entries). These projects challenged me to rapidly design engaging gameplay and refine my skills in Unity and C#.</p>`;
+      }
+      modal.style.display = "block";
     }
-    modal.style.display = "block";
-    }
-
-    
     function closeModal() {
       document.getElementById("project-modal").style.display = "none";
     }
@@ -232,39 +227,26 @@
             if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
         }
     }
-
-
-    function getMutedColor() {
-      const hue = Math.random() * 360; // Random hue
-      const saturation = 30 + Math.random() * 20; // Saturation between 30% and 50%
-      const lightness = 40 + Math.random() * 20; // Lightness between 40% and 60%
-      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    }
-
-    // Define an array with the desired colors
-    const particleColors = [
-    'rgba(34, 46, 80, 0.5)',
-    'rgba(0, 121, 145, 0.5)',
-    'rgba(67, 154, 134, 0.5)',
-    'rgba(188, 216, 193, 0.5)',
-    'rgba(233, 217, 133, 0.5)'
-    ];
-
     function createParticles() {
         particles = [];
         for (let i = 0; i < 50; i++) {
             let size = Math.random() * 5 + 2;
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
-            let speedX = (Math.random() - 0.4) * 1;
-            let speedY = (Math.random() - 0.4) * 1;
-            // Randomly select a color from the particleColors array
+            let speedX = (Math.random() - 0.5) * 1;
+            let speedY = (Math.random() - 0.5) * 1;
             let color = particleColors[Math.floor(Math.random() * particleColors.length)];
             particles.push(new Particle(x, y, size, color, speedX, speedY));
         }
     }
-
-
+    // Define an array with the desired muted colors
+    const particleColors = [
+      'rgba(34, 46, 80, 0.5)',
+      'rgba(0, 121, 145, 0.5)',
+      'rgba(67, 154, 134, 0.5)',
+      'rgba(188, 216, 193, 0.5)',
+      'rgba(233, 217, 133, 0.5)'
+    ];
     function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let particle of particles) {
