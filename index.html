@@ -12,6 +12,9 @@
   <link rel="icon" href="images/icon.ico" type="image/x-icon">
 </head>
 <body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
   <!-- Floating Particles (visible everywhere) -->
   <canvas id="particleCanvas"></canvas>
 
@@ -25,6 +28,9 @@
         <li><a href="#portfolio">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
   </nav>
 
@@ -48,7 +54,7 @@
         <div class="about-col-2" data-aos="fade-left" data-aos-duration="1200">
           <h1 class="sub-title">About me</h1>
           <p class="description">
-            I'm an Engineering student at UBC with a passion for software development, AI/ML, and embedded systems.
+            I'm an Engineering student at UBC with a passion for software development, AI/ML, and teaching.
             Through hands-on experience in machine learning, robotics, and software development, I have worked on projects ranging
             from developing AI models for autonomous object detection to designing IoT-based noise monitoring systems.
             I have also gained industry experience through internships and leadership roles in programming education.
@@ -147,6 +153,11 @@
   <div class="copyright">
     <p>Copyright © 2025 Anant Khanna. All Rights Reserved. Coded by Anant Khanna using HTML, CSS, and JavaScript.</p>
   </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -257,6 +268,51 @@
     }
     createParticles();
     animateParticles();
+
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      scrollProgress.style.width = `${scrollPercent}%`;
+
+      // Show/hide scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      if (window.scrollY > 300) {
+        scrollToTopBtn.style.display = 'block';
+      } else {
+        scrollToTopBtn.style.display = 'none';
+      }
+    });
+
+    // Scroll to Top Button Click Handler
+    document.getElementById('scrollToTop').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      icon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Update icon
+      icon.className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    });
   </script>
 </body>
 </html>
