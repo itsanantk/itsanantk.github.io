@@ -98,31 +98,40 @@
     <div class="container" data-aos="fade-up" data-aos-duration="1200">
       <h1 class="sub-title" data-aos="zoom-in" data-aos-duration="1000">Projects</h1>
       <div class="project-list">
-        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project1')">
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project5')">
+          <div class="image-container">
+            <img src="images/aether.png" alt="AetherShell Terminal Assistant">
+          </div>
+          <figcaption>AetherShell (AI Terminal Assistant)</figcaption>
+        </div>
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project4')">
           <div class="image-container">
             <img src="images/work-1.png" alt="AI Noise Source Prediction">
           </div>
           <figcaption>AI Noise Source Prediction</figcaption>
         </div>
-        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project2')">
+      
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
           <div class="image-container">
             <img src="images/work-2.png" alt="Claw Machine"/>
           </div>
           <figcaption>Claw Machine</figcaption>
         </div>
-        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
+      
+        <div class="project" data-aos="flip-left" data-aos-offset="-100" data-aos-duration="1200" onclick="openModal('project2')">
           <div class="image-container">
             <img src="images/work-3.png" alt="Bluetooth Tracking Robot" />
           </div>
           <figcaption>Bluetooth Tracking Robot</figcaption>
         </div>
-        <div class="project" data-aos="flip-left" data-aos-offset="-100" data-aos-duration="1200" onclick="openModal('project4')">
+      
+        <div class="project" data-aos="flip-left" data-aos-offset="-100" data-aos-duration="1200" onclick="openModal('project1')">
           <div class="image-container">
             <img src="images/game_dev.png" alt="Game Development Projects" />
           </div>
           <figcaption>Game Development: Cell Fusion & Blink</figcaption>
         </div>
-      </div>
+      </div>      
     </div>
   </div>
 
@@ -184,17 +193,31 @@
     function openModal(projectId) {
       const modal = document.getElementById("project-modal");
       const modalText = document.getElementById("modal-text");
-      if (projectId === "project1") {
+
+      if (projectId === "project5") {
+    modalText.innerHTML = `<h2>AetherShell - AI Terminal Assistant</h2>
+      <p>AetherShell is an AI-powered PowerShell assistant built using Python and OpenAI’s API. It understands natural language commands and interacts with the terminal in a conversational way. Key features include:</p>
+      <ul>
+        <li>Natural language understanding for terminal tasks</li>
+        <li>Context chaining and memory across commands</li>
+        <li>Smart error recovery and path validation</li>
+        <li>Seamless experience in both interactive and non-interactive terminals</li>
+      </ul>
+      <p>Built with a focus on user experience, this project blends modern AI capabilities with traditional CLI power.</p>
+      <p><a href="https://github.com/itsanantk/aethershell" target="_blank">View on GitHub</a></p>`;
+      } 
+
+      if (projectId === "project4") {
         modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
           <p>Developed an IoT system using Raspberry Pi and TensorFlow (YAMNet) to classify and visualize real-time noise levels.</p>`;
-      } else if (projectId === "project2") {
+      } else if (projectId === "project3") {
         modalText.innerHTML = `<h2>Claw Machine</h2>
           <p>Designed and built a semi-autonomous claw using Arduino and servo motors. The claw was programmed to pick up objects of varying sizes and weights efficiently.</p>
           <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
-      } else if (projectId === "project3") {
+      } else if (projectId === "project2") {
         modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
           <p>Created a robot using Raspberry Pi to track remote devices via RSSI, integrating Sphinx voice recognition and signal smoothing algorithms for improved accuracy.</p>`;
-      } else if (projectId === "project4") {
+      } else if (projectId === "project1") {
         modalText.innerHTML = `<h2>Game Development Projects</h2>
           <p>Developed two games during game jams: <a href="https://antgenix.itch.io/cell-fusion" target="_blank">Cell Fusion</a> (5th place out of 81 entries) and <a href="https://kasmeltz.itch.io/blink" target="_blank">Blink</a> (4th place out of 86 entries). These projects challenged me to rapidly design engaging gameplay and refine my skills in Unity and C#.</p>`;
       }

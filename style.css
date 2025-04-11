@@ -43,7 +43,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Light Theme Variables */
+/* Dark Theme Variables */
 :root {
   --bg-color: #2d2d2d;
   --text-color: #fff;
@@ -53,7 +53,7 @@ body {
   --accent-color: #2a8b8e;
 }
 
-/* Dark Theme Variables */
+/* Light Theme Variables */
 [data-theme="light"] {
   --bg-color: #ffffff;
   --text-color: #333;
@@ -242,7 +242,6 @@ nav ul li a:hover {
   margin-top: 40px;
 }
 .project {
-  border-radius: 10px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -257,10 +256,17 @@ nav ul li a:hover {
   height: 325px;
   padding-top: 75%; /* 4:3 aspect ratio (adjust as needed) */
   overflow: hidden;
+  border: 0px solid var(--accent-color);
   border-radius: 10px;
+  transition: border 0.5s ease;
+}
+
+.image-container:hover{
+  border: 3px solid var(--accent-color);
 }
 
 .image-container img {
+  scale: 1.005;
   position: absolute;
   top: 0;
   left: 0;
@@ -289,7 +295,6 @@ nav ul li a:hover {
   color: var(--secondary-text); 
 }
 
-
 .project:hover img {
   transform: scale(1.05);
 }
@@ -305,6 +310,34 @@ nav ul li a:hover {
   font-size: 14px;
   color: #ccc;
 }
+
+
+/* Apply border and hover glow ONLY to the image container of first project 
+.project:first-child .image-container {
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(42, 139, 142, 0.3);
+  border-radius: 10px;
+  transition: scale 0.5s ease, transform 0.4s ease, box-shadow 0.8s ease;
+  transform-origin: center;
+
+}
+
+/* Scale entire project box 
+.project:first-child {
+  scale: 1;
+  transition: scale 5s ease;
+}*/
+
+/* On hover: slightly enlarge and glow */
+/*.project:first-child:hover {
+  /*scale: 1.005;
+}
+
+.project:first-child:hover .image-container {
+  /*box-shadow: 0 0 30px rgba(42, 139, 142, 0.5);
+}
+
+
 
 /* Contact */
 #contact {
@@ -344,6 +377,7 @@ nav ul li a:hover {
   background: #262626;
   font-weight: 300;
   margin-top: 20px;
+  color: white;
 }
 
 /* Modal */
