@@ -73,6 +73,24 @@ nav {
 }
 
 /* Sticky Navigation */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--text-color);
+  border-radius: 2px;
+}
+
+
 nav {
   position: fixed;
   top: 0;
@@ -116,8 +134,9 @@ nav ul li a:hover {
 /* Header Section */
 #header {
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh) * 100);
   background-size: cover;
+  background-position: center;  background-size: cover;
   background-position: center;
 }
 .container {
@@ -477,4 +496,70 @@ nav ul li a:hover {
 
 .scroll-to-top:active {
   transform: translateY(1px);
+}
+
+
+/* ----- Tablet & Mobile (< 768px) ----- */
+@media (max-width: 768px) {
+  /* Show hamburger, hide links by default */
+  .hamburger { display: flex; }
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    background: var(--nav-bg);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  nav ul.active { display: flex; }
+
+  /* Stack About columns */
+  .row { flex-direction: column; }
+  .about-col-1,
+  .about-col-2 { flex-basis: 100%; }
+
+  /* One-column Projects */
+  .project-list {
+    grid-template-columns: 1fr !important;
+    grid-gap: 20px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-col-1,
+  .about-col-2 {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+  /* give some breathing room between image and text */
+  .about-col-1 {
+    margin-bottom: 1.5rem;
+  }
+  /* ensure text has its own background so it never floats on top */
+  .about-col-2 {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  /* Reduce paddings & margins */
+  .container { padding: 10px 5%; }
+  #about, #portfolio, #contact { padding: 40px 0; }
+}
+
+/* ----- Phone (< 480px) ----- */
+@media (max-width: 480px) {
+  /* Smaller header text */
+  .header-text h1 { font-size: 36px; }
+  .header-text p   { font-size: 18px; }
+
+  /* Smaller section titles */
+  .sub-title { font-size: 36px; }
+
+  /* Reduce avatar size */
+  .about-col-1 img { margin-top: 20px; }
 }
