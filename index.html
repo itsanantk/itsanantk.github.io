@@ -108,6 +108,15 @@
     <div class="container" data-aos="fade-up" data-aos-duration="1200">
       <h1 class="sub-title" data-aos="zoom-in" data-aos-duration="1000">Projects</h1>
       <div class="project-list">
+
+        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project6')">
+          <div class="image-container">
+            <img src="images/fpga_mac.png" alt="FPGA Neural MAC Accelerator" />
+          </div>
+          <figcaption>FPGA Neural MAC Accelerator</figcaption>
+        </div>
+        
+
         <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project5')">
           <div class="image-container">
             <img src="images/aether.png" alt="AetherShell Terminal Assistant">
@@ -121,7 +130,7 @@
           <figcaption>AI Noise Source Prediction</figcaption>
         </div>
       
-        <div class="project" data-aos="flip-left" data-aos-duration="1200" onclick="openModal('project3')">
+        <div class="project" data-aos="flip-left"  data-aos-offset="-100" data-aos-duration="1200" onclick="openModal('project3')">
           <div class="image-container">
             <img src="images/work-2.png" alt="Claw Machine"/>
           </div>
@@ -220,63 +229,77 @@
       const modalText = document.getElementById("modal-text");
 
       if (projectId === "project5") {
-  modalText.innerHTML = `<h2>AetherShell – AI Terminal Assistant</h2>
-    <p>AetherShell is an AI-powered terminal assistant built with Python and OpenAI’s API. It processes natural language commands and seamlessly integrates with the command line, creating a conversational experience for developers.</p>
-    <ul>
-      <li>Natural language understanding for shell/terminal tasks</li>
-      <li>Context chaining and memory between commands</li>
-      <li>Self-healing logic and smart path validation</li>
-      <li>Real-time streaming output and error handling</li>
-      <li>Supports interactive and non-interactive terminal environments</li>
-    </ul>
-    <p>Designed for productivity, AetherShell bridges AI capabilities with CLI workflows.</p>
-    <p><a href="https://github.com/itsanantk/aethershell" target="_blank">View on GitHub</a></p>`;
-}
+        modalText.innerHTML = `<h2>AetherShell – AI Terminal Assistant</h2>
+          <p>AetherShell is an AI-powered terminal assistant built with Python and OpenAI’s API. It processes natural language commands and seamlessly integrates with the command line, creating a conversational experience for developers.</p>
+          <ul>
+            <li>Natural language understanding for shell/terminal tasks</li>
+            <li>Context chaining and memory between commands</li>
+            <li>Self-healing logic and smart path validation</li>
+            <li>Real-time streaming output and error handling</li>
+            <li>Supports interactive and non-interactive terminal environments</li>
+          </ul>
+          <p>Designed for productivity, AetherShell bridges AI capabilities with CLI workflows.</p>
+          <p><a href="https://github.com/itsanantk/aethershell" target="_blank">View on GitHub</a></p>`;
+      }
 
-else if (projectId === "project4") {
-  modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
-    <p>This IoT project uses Raspberry Pi Zero 2 W and TensorFlow's YAMNet model to monitor and classify noise across campus in real-time.</p>
-        <p>Helps identify noise hotspots and patterns to inform campus planning.</p>
+      else if (projectId === "project4") {
+        modalText.innerHTML = `<h2>AI Noise Source Prediction and Forecast</h2>
+          <p>This IoT project uses Raspberry Pi Zero 2 W and TensorFlow's YAMNet model to monitor and classify noise across campus in real-time.</p>
+              <p>Helps identify noise hotspots and patterns to inform campus planning.</p>
 
-    <ul>
-      <li>Collected live audio streams and extracted embeddings</li>
-      <li>Used YAMNet to classify noise types (e.g., traffic, construction, voices)</li>
-      <li>Developing a Flask backend for live web visualization (in progress)</li>
-    </ul>
-    <p>Helps identify noise hotspots and patterns to inform campus planning.</p>`;
-}
+          <ul>
+            <li>Collected live audio streams and extracted embeddings</li>
+            <li>Used YAMNet to classify noise types (e.g., traffic, construction, voices)</li>
+            <li>Developing a Flask backend for live web visualization (in progress)</li>
+          </ul>
+          <p>Helps identify noise hotspots and patterns to inform campus planning.</p>`;
+      }
 
-else if (projectId === "project3") {
-  modalText.innerHTML = `<h2>Claw Machine</h2>
-    <p>Built a semi-autonomous robotic claw system using Arduino and servo motors.</p>
-    <ul>
-      <li>Programmed motion control for accurate pickup of various object shapes</li>
-      <li>Implemented a logical timing system for a fast paced competition setting</li>
-      <li>Created physical casing and wiring system for long-term durability</li>
-    </ul>
-    <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
-}
+      else if (projectId === "project3") {
+        modalText.innerHTML = `<h2>Claw Machine</h2>
+          <p>Built a semi-autonomous robotic claw system using Arduino and servo motors.</p>
+          <ul>
+            <li>Programmed motion control for accurate pickup of various object shapes</li>
+            <li>Implemented a logical timing system for a fast paced competition setting</li>
+            <li>Created physical casing and wiring system for long-term durability</li>
+          </ul>
+          <img src="images/claw_project_sketch.jpg" alt="Claw Project Sketch" style="width:100%; max-width:600px; margin-top:20px;">`;
+      }
 
-else if (projectId === "project2") {
-  modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
-    <p>Created a mobile robot that follows a Bluetooth device using RSSI values, built on Raspberry Pi.</p>
-    <ul>
-      <li>Integrated Sphinx voice recognition to activate robot functions</li>
-      <li>Connected to target a Bluetooth device and monitored RSSI signal strength</li>
-      <li>Designed a smoothing algorithm to reduce signal noise and improve accuracy</li>
-      <li>Achieved 25% increase in tracking reliability over baseline implementation</li>
-    </ul>`;
-}
+      else if (projectId === "project2") {
+        modalText.innerHTML = `<h2>Bluetooth Tracking Robot</h2>
+          <p>Created a mobile robot that follows a Bluetooth device using RSSI values, built on Raspberry Pi.</p>
+          <ul>
+            <li>Integrated Sphinx voice recognition to activate robot functions</li>
+            <li>Connected to target a Bluetooth device and monitored RSSI signal strength</li>
+            <li>Designed a smoothing algorithm to reduce signal noise and improve accuracy</li>
+            <li>Achieved 25% increase in tracking reliability over baseline implementation</li>
+          </ul>`;
+      }
 
-else if (projectId === "project1") {
-  modalText.innerHTML = `<h2>Game Development Projects</h2>
-    <p>Built two complete games for game jams using Unity and C#.</p>
-    <ul>
-      <li><a href="https://antgenix.itch.io/cell-fusion" target="_blank">Cell Fusion</a> – A puzzle-strategy game about fusing cells. Placed 5th out of 81 entries</li>
-      <li><a href="https://kasmeltz.itch.io/blink" target="_blank">Blink</a> – A narrative platformer with a time-blink mechanic. Placed 4th out of 86 entries</li>
-      <li>Worked under strict time limits to deliver polished, playable games</li>
-     </ul>`;
-}
+      else if (projectId === "project1") {
+        modalText.innerHTML = `<h2>Game Development Projects</h2>
+          <p>Built two complete games for game jams using Unity and C#.</p>
+          <ul>
+            <li><a href="https://antgenix.itch.io/cell-fusion" target="_blank">Cell Fusion</a> – A puzzle-strategy game about fusing cells. Placed 5th out of 81 entries</li>
+            <li><a href="https://kasmeltz.itch.io/blink" target="_blank">Blink</a> – A narrative platformer with a time-blink mechanic. Placed 4th out of 86 entries</li>
+            <li>Worked under strict time limits to deliver polished, playable games</li>
+          </ul>`;
+      }
+
+      else if (projectId === "project6") {
+        modalText.innerHTML = `<h2>FPGA Neural MAC Accelerator</h2>
+          <p>A hardware accelerator for neural network inference implemented on the DE1-SoC FPGA.</p>
+          <ul>
+            <li>Designed and implemented a single-layer neural network MAC unit in Verilog</li>
+            <li>Developed a memory-mapped C++ interface on ARM HPS to stream input, weight, and bias data</li>
+            <li>Enabled real-time inference by integrating software–hardware communication on embedded Linux</li>
+            <li>Built foundational accelerator architecture mirroring dense layers in commercial AI SoCs</li>
+          </ul>
+        `;
+      }
+
+
       modal.style.display = "block";
     }
     function closeModal() {
