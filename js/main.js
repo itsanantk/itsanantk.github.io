@@ -60,7 +60,7 @@
 
   /* ---------- typewriter ---------- */
   const roles = [
-    "Machine Learning Engineer @ Agriprix",
+    "Software Engineer @ Agriprix",
     "Computer Engineering @ UBC",
     "ML Team Lead @ UBC UAS",
     "FPGA & Embedded Developer",
