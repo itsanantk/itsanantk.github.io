@@ -150,11 +150,12 @@
             <p class="mono timeline-date">May 2026 — Present</p>
             <h3>Software Engineer · <span class="grad">Agriprix</span></h3>
             <ul>
-              <li>Rebuilt the hybrid intent router (deterministic + LLM classification) of an LLM agent platform spanning <strong>70+ tools</strong>; added per-call token/latency observability with multi-provider failover</li>
-              <li>Shipped <strong>Stripe authorize/capture</strong> checkout with deterministic idempotency keys, integer-cent commission engine, and per-farm fulfillment state machines for multi-supplier orders</li>
-              <li>Led a security audit surfacing <strong>67 vulnerabilities (5 critical)</strong> — patched mass-assignment/IDOR serializers, fixed overselling races via row-level locking, shipped a Playwright E2E suite</li>
+              <li>Rebuilt the hybrid intent router (deterministic rules + LLM classification) for an agent platform spanning <strong>70+ tools</strong>; added per-call token/latency observability with automatic failover across <strong>5 model providers</strong></li>
+              <li>Implemented <strong>Stripe authorize-and-capture</strong> checkout with deterministic idempotency keys, an integer-cent commission pricing engine, and per-farm fulfillment state machines for multi-supplier orders</li>
+              <li>Led a platform security audit surfacing <strong>67 vulnerabilities (5 critical)</strong> — patched mass-assignment/IDOR serializers, eliminated overselling races via row-level locking, shipped a <strong>15-case Playwright E2E suite</strong> covering the supplier-to-buyer order journey</li>
+              <li>Built a <strong>WhatsApp AI assistant</strong> on the WhatsApp Business Cloud API, routing inbound webhooks into the agent layer so buyers and suppliers can transact directly over chat</li>
             </ul>
-            <div class="tags"><span>Python</span><span>Django</span><span>PostgreSQL</span><span>Stripe</span><span>LLM</span><span>Playwright</span></div>
+            <div class="tags"><span>Python</span><span>Django / DRF</span><span>PostgreSQL</span><span>Stripe</span><span>LLM</span><span>Playwright</span><span>WhatsApp API</span></div>
           </div>
         </article>
 
@@ -176,10 +177,10 @@
           <div class="timeline-marker" aria-hidden="true"></div>
           <div class="timeline-card">
             <p class="mono timeline-date">Oct 2025 — Present</p>
-            <h3>Lead Developer · <span class="grad">UBC Finds</span></h3>
+            <h3>Co-founder &amp; Lead Developer · <span class="grad">UBC Finds</span></h3>
             <ul>
-              <li>Full-stack live lost-and-found platform for UBC with real-time status updates</li>
-              <li>Event-driven state management keeping asynchronous reports and live map updates atomically consistent</li>
+              <li>Built a campus utility finder map on React/Next.js and Supabase, architecting event-driven state synchronization over Supabase realtime channels that eliminates race conditions through atomic writes</li>
+              <li>Optimized report aggregation and live map rendering for low-latency updates as new utility reports stream in</li>
             </ul>
             <div class="tags"><span>React</span><span>Next.js</span><span>Supabase</span><span>Realtime</span></div>
           </div>
@@ -285,22 +286,29 @@
           <h3 class="mono">hardware / RTL</h3>
           <div class="chips">
             <span>Verilog</span><span>SystemVerilog</span><span>Intel Quartus</span><span>QuestaSim</span>
-            <span>Platform Designer</span><span>ARM SoCs</span><span>RISC-V Assembly</span><span>ARM Assembly</span>
+            <span>Platform Designer</span><span>ARM SoCs</span>
           </div>
         </div>
         <div class="skill-group reveal" style="--d:1">
           <h3 class="mono">languages</h3>
           <div class="chips">
             <span>Python</span><span>C</span><span>C++</span><span>C#</span><span>Java</span>
-            <span>JavaScript</span><span>SQL</span>
+            <span>JavaScript</span><span>TypeScript</span><span>SQL</span><span>RISC-V Assembly</span><span>ARM Assembly</span>
           </div>
         </div>
         <div class="skill-group reveal" style="--d:2">
-          <h3 class="mono">frameworks &amp; tools</h3>
+          <h3 class="mono">frameworks</h3>
           <div class="chips">
+            <span>Django / DRF</span><span>FastAPI</span><span>Celery</span>
+            <span>React</span><span>Next.js</span>
             <span>PyTorch</span><span>TensorFlow</span><span>TensorRT</span><span>YOLO / Ultralytics</span>
-            <span>React</span><span>Next.js</span><span>Supabase</span><span>PostgreSQL</span><span>MySQL</span>
-            <span>Linux</span><span>Unity</span><span>Git</span>
+          </div>
+        </div>
+        <div class="skill-group reveal" style="--d:3">
+          <h3 class="mono">tools &amp; cloud</h3>
+          <div class="chips">
+            <span>Google Cloud Platform</span><span>Docker</span><span>PostgreSQL</span><span>MySQL</span>
+            <span>Supabase</span><span>Stripe</span><span>Playwright</span><span>Git</span><span>Linux</span>
           </div>
         </div>
       </div>
