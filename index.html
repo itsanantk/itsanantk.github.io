@@ -10,11 +10,14 @@
   <meta property="og:description" content="Computer Engineering @ UBC · ML Engineer @ Agriprix · ML Lead @ UBC UAS. From FPGA gates to neural networks to full-stack apps." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://itsanantk.github.io/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1a'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='bold' fill='%2334d399' text-anchor='middle'%3EAK%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23EFE8D9'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='600' fill='%2324418C' text-anchor='middle'%3EAK%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,71 +36,71 @@
   </script>
 </head>
 <body>
-  <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
-    <a class="nav-logo" href="#top" aria-label="Back to top">
-      <span class="logo-bracket">&lt;</span>AK<span class="logo-bracket">/&gt;</span>
-    </a>
+    <a class="nav-logo" href="#top">Anant Khanna</a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#about" data-section="about"><span class="nav-index">01.</span>About</a>
-      <a href="#experience" data-section="experience"><span class="nav-index">02.</span>Experience</a>
-      <a href="#projects" data-section="projects"><span class="nav-index">03.</span>Projects</a>
-      <a href="#skills" data-section="skills"><span class="nav-index">04.</span>Skills</a>
-      <a href="#contact" data-section="contact"><span class="nav-index">05.</span>Contact</a>
-      <a class="btn btn-outline btn-sm" href="Anant_Khanna_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#experience" data-section="experience">Experience</a>
+      <a href="#projects" data-section="projects">Projects</a>
+      <a href="#skills" data-section="skills">Skills</a>
+      <a href="#contact" data-section="contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">☾</button>
+      <button class="palette-hint mono" id="paletteHint" type="button" aria-label="Open command palette">⌘K</button>
+      <a class="nav-resume" href="Anant_Khanna_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+      <span></span><span></span>
     </button>
   </header>
 
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <canvas id="particles" aria-hidden="true"></canvas>
-      <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <p class="hero-eyebrow mono">// hi, my name is</p>
-        <h1 class="hero-name">Anant <span class="grad">Khanna</span><span class="hero-cursor-block" aria-hidden="true">_</span></h1>
-        <p class="hero-role mono" aria-live="polite">
-          <span class="typed" id="typed"></span><span class="typed-caret" aria-hidden="true"></span>
-        </p>
-        <p class="hero-tagline">
-          I build intelligent systems across the stack — from <strong>FPGA gates</strong> to
-          <strong>neural networks</strong> to <strong>full-stack apps</strong>.
+      <div class="hero-text">
+        <p class="eyebrow reveal">Machine learning engineer — Vancouver, BC</p>
+        <h1 class="hero-name reveal" style="--d:1">Anant<br />Khanna</h1>
+        <p class="hero-statement reveal" style="--d:2">
+          I build intelligent systems across the stack — from
+          <em>FPGA gates</em> to <em>neural networks</em> to <em>full-stack apps</em>.
           Computer Engineering @ UBC, currently shipping ML at Agriprix.
         </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#projects">View my work</a>
-          <a class="btn btn-outline" href="Anant_Khanna_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+        <div class="hero-cta reveal" style="--d:3">
+          <a class="btn-ink" href="#projects">View my work</a>
+          <a class="link-quiet" href="Anant_Khanna_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
         </div>
-        <div class="hero-socials">
-          <a href="https://github.com/itsanantk" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/itsanantk/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
-          </a>
-          <a href="mailto:itsanantk@gmail.com" aria-label="Email">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7L22 7"/></svg>
-          </a>
-        </div>
+        <p class="hero-links mono reveal" style="--d:4">
+          <a href="https://github.com/itsanantk" target="_blank" rel="noopener">GitHub</a>
+          <span aria-hidden="true">/</span>
+          <a href="https://www.linkedin.com/in/itsanantk/" target="_blank" rel="noopener">LinkedIn</a>
+          <span aria-hidden="true">/</span>
+          <a href="mailto:itsanantk@gmail.com">itsanantk@gmail.com</a>
+          <span aria-hidden="true">/</span>
+          <a href="#terminal">terminal</a>
+        </p>
       </div>
-      <a class="scroll-hint" href="#about" aria-label="Scroll to About">
-        <span class="mono">scroll</span>
-        <span class="scroll-line" aria-hidden="true"></span>
-      </a>
+
+      <figure class="viewport reveal" style="--d:2" id="figViewport">
+        <span class="hud hud-tl" aria-hidden="true">pts · 4000</span>
+        <span class="hud hud-tr" aria-hidden="true">click ▸</span>
+        <canvas id="hero3d" aria-hidden="true"></canvas>
+        <figcaption class="fig-caption mono" id="figCaption" aria-live="polite">
+          <span class="fig-id" id="figId">FIG. A</span>
+          <span class="fig-name" id="figName">Order &amp; pricing systems</span>
+          <span class="fig-ctx" id="figCtx">Software Engineer — Agriprix</span>
+        </figcaption>
+      </figure>
     </section>
 
     <!-- ============ ABOUT ============ -->
     <section class="section" id="about">
-      <h2 class="section-title reveal"><span class="mono section-index">01.</span> About me</h2>
+      <div class="section-head reveal">
+        <p class="eyebrow">01 / About</p>
+        <h2 class="section-title">Every layer of the machine</h2>
+      </div>
       <div class="about-grid">
-        <div class="about-text reveal">
+        <div class="about-text reveal" style="--d:1">
           <p>
             I'm a Computer Engineering student at the <strong>University of British Columbia</strong>
             (Dean's List 2025) who likes working at every layer of the machine — Verilog on an FPGA one day,
@@ -114,27 +117,24 @@
             Off the clock I build games — two of them placed <strong>top-5 in back-to-back game jams</strong> —
             and I've taught programming to 120+ kids as an instructor at Code Ninjas.
           </p>
-          <div class="now-box mono">
-            <span class="now-dot" aria-hidden="true"></span>
-            currently: Software Engineer @ Agriprix · ML Lead @ UBC UAS
-          </div>
+          <p class="now-line mono">Currently — Software Engineer @ Agriprix · ML Lead @ UBC UAS</p>
         </div>
         <div class="about-stats">
-          <div class="stat reveal" style="--d:0">
-            <span class="stat-num" data-count="98" data-suffix="%">0</span>
-            <span class="stat-label">detection accuracy on UBC UAS vision pipeline</span>
-          </div>
           <div class="stat reveal" style="--d:1">
-            <span class="stat-num" data-count="300" data-suffix="%">0</span>
-            <span class="stat-label">speedup from my FPGA neural-net accelerator</span>
+            <span class="stat-num" data-count="98" data-suffix="%">0</span>
+            <span class="stat-label">detection accuracy, UBC UAS vision pipeline</span>
           </div>
           <div class="stat reveal" style="--d:2">
-            <span class="stat-num" data-count="120" data-suffix="+">0</span>
-            <span class="stat-label">students taught to code at Code Ninjas</span>
+            <span class="stat-num" data-count="300" data-suffix="%">0</span>
+            <span class="stat-label">speedup, FPGA neural-net accelerator</span>
           </div>
           <div class="stat reveal" style="--d:3">
+            <span class="stat-num" data-count="120" data-suffix="+">0</span>
+            <span class="stat-label">students taught at Code Ninjas</span>
+          </div>
+          <div class="stat reveal" style="--d:4">
             <span class="stat-num" data-count="2" data-suffix="×">0</span>
-            <span class="stat-label">top-5 game jam finishes (Cell Fusion, Blink)</span>
+            <span class="stat-label">top-5 game jam finishes</span>
           </div>
         </div>
       </div>
@@ -142,203 +142,261 @@
 
     <!-- ============ EXPERIENCE ============ -->
     <section class="section" id="experience">
-      <h2 class="section-title reveal"><span class="mono section-index">02.</span> Where I've worked</h2>
-      <div class="timeline">
-        <article class="timeline-item reveal">
-          <div class="timeline-marker" aria-hidden="true"></div>
-          <div class="timeline-card">
-            <p class="mono timeline-date">May 2026 — Present</p>
-            <h3>Software Engineer · <span class="grad">Agriprix</span></h3>
-            <ul>
-              <li>Rebuilt the hybrid intent router (deterministic rules + LLM classification) for an agent platform spanning <strong>70+ tools</strong>; added per-call token/latency observability with automatic failover across <strong>5 model providers</strong></li>
-              <li>Implemented <strong>Stripe authorize-and-capture</strong> checkout with deterministic idempotency keys, an integer-cent commission pricing engine, and per-farm fulfillment state machines for multi-supplier orders</li>
-              <li>Led a platform security audit surfacing <strong>67 vulnerabilities (5 critical)</strong> — patched mass-assignment/IDOR serializers, eliminated overselling races via row-level locking, shipped a <strong>15-case Playwright E2E suite</strong> covering the supplier-to-buyer order journey</li>
-              <li>Built a <strong>WhatsApp AI assistant</strong> on the WhatsApp Business Cloud API, routing inbound webhooks into the agent layer so buyers and suppliers can transact directly over chat</li>
-            </ul>
-            <div class="tags"><span>Python</span><span>Django / DRF</span><span>PostgreSQL</span><span>Stripe</span><span>LLM</span><span>Playwright</span><span>WhatsApp API</span></div>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-marker" aria-hidden="true"></div>
-          <div class="timeline-card">
-            <p class="mono timeline-date">Sept 2024 — Present</p>
-            <h3>ML Software Engineer Team Lead · <span class="grad">UBC UAS</span></h3>
-            <ul>
-              <li>Real-time autonomous object detection (YOLOv11) on embedded systems moving at 50+ km/h — 98% detection accuracy, +30% mAP</li>
-              <li>Metric-learning re-identification with Vision Transformer embeddings, invariant to lighting and orientation</li>
-              <li>TensorRT FP16 quantization: 50% less memory bandwidth within 0.5% of baseline precision</li>
-            </ul>
-            <div class="tags"><span>PyTorch</span><span>C++</span><span>TensorRT</span><span>YOLOv11</span><span>Embedded</span></div>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-marker" aria-hidden="true"></div>
-          <div class="timeline-card">
-            <p class="mono timeline-date">Oct 2025 — Present</p>
-            <h3>Co-founder &amp; Lead Developer · <span class="grad">UBC Finds</span></h3>
-            <ul>
-              <li>Built a campus utility finder map on React/Next.js and Supabase, architecting event-driven state synchronization over Supabase realtime channels that eliminates race conditions through atomic writes</li>
-              <li>Optimized report aggregation and live map rendering for low-latency updates as new utility reports stream in</li>
-            </ul>
-            <div class="tags"><span>React</span><span>Next.js</span><span>Supabase</span><span>Realtime</span></div>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-marker" aria-hidden="true"></div>
-          <div class="timeline-card">
-            <p class="mono timeline-date">May 2025 — Aug 2025</p>
-            <h3>Programming Instructor · <span class="grad">Code Ninjas</span></h3>
-            <ul>
-              <li>Designed and delivered 15+ project-based C#/JavaScript curricula for 120+ students</li>
-            </ul>
-            <div class="tags"><span>C#</span><span>JavaScript</span><span>Teaching</span></div>
-          </div>
-        </article>
+      <div class="section-head reveal">
+        <p class="eyebrow">02 / Experience</p>
+        <h2 class="section-title">Where I've worked</h2>
       </div>
+
+      <article class="exp reveal">
+        <div class="exp-meta mono">
+          <p class="exp-date">May 2026 — Present</p>
+          <p class="exp-org">Agriprix</p>
+        </div>
+        <div class="exp-body">
+          <h3>Software Engineer</h3>
+          <ul>
+            <li>Rebuilt the hybrid intent router (deterministic rules + LLM classification) for an agent platform spanning <strong>70+ tools</strong>; added per-call token/latency observability with automatic failover across <strong>5 model providers</strong></li>
+            <li>Implemented <strong>Stripe authorize-and-capture</strong> checkout with deterministic idempotency keys, an integer-cent commission pricing engine, and per-farm fulfillment state machines for multi-supplier orders</li>
+            <li>Led a platform security audit surfacing <strong>67 vulnerabilities (5 critical)</strong> — patched mass-assignment/IDOR serializers, eliminated overselling races via row-level locking, shipped a <strong>15-case Playwright E2E suite</strong> covering the supplier-to-buyer order journey</li>
+            <li>Built a <strong>WhatsApp AI assistant</strong> on the WhatsApp Business Cloud API, routing inbound webhooks into the agent layer so buyers and suppliers can transact directly over chat</li>
+          </ul>
+          <p class="exp-tags mono">Python · Django / DRF · PostgreSQL · Stripe · LLM · Playwright · WhatsApp API</p>
+        </div>
+      </article>
+
+      <article class="exp reveal">
+        <div class="exp-meta mono">
+          <p class="exp-date">Sept 2024 — Present</p>
+          <p class="exp-org">UBC UAS</p>
+        </div>
+        <div class="exp-body">
+          <h3>ML Software Engineer Team Lead</h3>
+          <ul>
+            <li>Real-time autonomous object detection (YOLOv11) on embedded systems moving at 50+ km/h — 98% detection accuracy, +30% mAP</li>
+            <li>Metric-learning re-identification with Vision Transformer embeddings, invariant to lighting and orientation</li>
+            <li>TensorRT FP16 quantization: 50% less memory bandwidth within 0.5% of baseline precision</li>
+          </ul>
+          <p class="exp-tags mono">PyTorch · C++ · TensorRT · YOLOv11 · Embedded</p>
+        </div>
+      </article>
+
+      <article class="exp reveal">
+        <div class="exp-meta mono">
+          <p class="exp-date">Oct 2025 — Present</p>
+          <p class="exp-org">UBC Finds</p>
+        </div>
+        <div class="exp-body">
+          <h3>Co-founder &amp; Lead Developer</h3>
+          <ul>
+            <li>Built a campus utility finder map on React/Next.js and Supabase, architecting event-driven state synchronization over Supabase realtime channels that eliminates race conditions through atomic writes</li>
+            <li>Optimized report aggregation and live map rendering for low-latency updates as new utility reports stream in</li>
+          </ul>
+          <p class="exp-tags mono">React · Next.js · Supabase · Realtime</p>
+        </div>
+      </article>
+
+      <article class="exp reveal">
+        <div class="exp-meta mono">
+          <p class="exp-date">May 2025 — Aug 2025</p>
+          <p class="exp-org">Code Ninjas</p>
+        </div>
+        <div class="exp-body">
+          <h3>Programming Instructor</h3>
+          <ul>
+            <li>Designed and delivered 15+ project-based C#/JavaScript curricula for 120+ students</li>
+          </ul>
+          <p class="exp-tags mono">C# · JavaScript · Teaching</p>
+        </div>
+      </article>
     </section>
 
     <!-- ============ PROJECTS ============ -->
     <section class="section" id="projects">
-      <h2 class="section-title reveal"><span class="mono section-index">03.</span> Things I've built</h2>
+      <div class="section-head reveal">
+        <p class="eyebrow">03 / Projects</p>
+        <h2 class="section-title">Things I've built</h2>
+      </div>
       <div class="projects-grid">
 
-        <article class="project-card tilt reveal" style="--d:0">
-          <div class="project-top">
-            <span class="award-badge">🏆 ProduHacks × Fetch.ai award</span>
-            <a class="proj-link" href="https://github.com/Michael-R-Dickinson/produhacks" target="_blank" rel="noopener" aria-label="Wealth Council on GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            </a>
+        <article class="project reveal span-4" style="--d:0">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. H</span>
+            <span class="award">Award — ProduHacks × Fetch.ai</span>
+            <a class="proj-link" href="https://github.com/Michael-R-Dickinson/produhacks" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
           <h3>Wealth Council</h3>
           <p>Agentic investment platform: a multi-agent orchestration layer (Fetch.ai uAgents) computes portfolio
              risk while FinBERT runs sentiment analysis on live financial news, and Gemini synthesizes the final
              report — streamed to React in real time over SSE.</p>
-          <div class="tags"><span>Python</span><span>FastAPI</span><span>React</span><span>Gemini</span><span>Fetch.ai</span></div>
+          <p class="proj-tags mono">Python · FastAPI · React · Gemini · Fetch.ai</p>
         </article>
 
-        <article class="project-card tilt reveal" style="--d:1">
-          <div class="project-top">
-            <a class="proj-link" href="https://github.com/yashvasdev/EDT-Hackathon" target="_blank" rel="noopener" aria-label="GuardCam on GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            </a>
+        <article class="project reveal span-2" style="--d:1">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. I</span>
+            <a class="proj-link" href="https://github.com/yashvasdev/EDT-Hackathon" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
-          <h3>GuardCam — AI Dashcam</h3>
+          <h3>GuardCam</h3>
           <p>Edge-to-cloud driver monitoring that catches micro-sleeps: a custom TCP WebSocket bridge streams
              video with minimal latency to a headless GPU server, where a 468-point face mesh computes Eye Aspect
              Ratio and fires sub-second haptic alerts.</p>
-          <div class="tags"><span>Python</span><span>React Native</span><span>OpenCV</span><span>MediaPipe</span><span>Modal</span></div>
+          <p class="proj-tags mono">Python · React Native · OpenCV · MediaPipe · Modal</p>
         </article>
 
-        <article class="project-card tilt reveal" style="--d:2">
-          <div class="project-top"></div>
+        <article class="project reveal span-2" style="--d:2">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. J</span>
+          </div>
           <h3>FPGA Neural-Net Accelerator</h3>
           <p>A neural network inference engine in Verilog on a DE1-SoC, with a memory-mapped C++ driver on the
              ARM HPS under embedded Linux. 3,000 inferences/sec — a 300% speedup over ARM-only execution.</p>
-          <div class="tags"><span>Verilog</span><span>FPGA</span><span>C++</span><span>ARM</span><span>Embedded Linux</span></div>
+          <p class="proj-tags mono">Verilog · FPGA · C++ · ARM · Embedded Linux</p>
         </article>
 
-        <article class="project-card tilt reveal" style="--d:3">
-          <div class="project-top">
-            <a class="proj-link" href="https://github.com/itsanantk/AetherShell" target="_blank" rel="noopener" aria-label="AetherShell on GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            </a>
+        <article class="project reveal span-4" style="--d:3">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. K</span>
+            <a class="proj-link" href="https://github.com/itsanantk/AetherShell" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
           <h3>AetherShell</h3>
           <p>An AI-powered PowerShell assistant: natural language in, safe shell commands out. Open source under MIT.</p>
-          <div class="tags"><span>Python</span><span>LLM</span><span>PowerShell</span><span>Open Source</span></div>
+          <p class="proj-tags mono">Python · LLM · PowerShell · Open Source</p>
         </article>
 
-        <article class="project-card tilt reveal" style="--d:4">
-          <div class="project-top"></div>
+        <article class="project reveal span-3" style="--d:4">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. L</span>
+          </div>
           <h3>Campus Noise Map</h3>
           <p>IoT network of Raspberry Pi Zero 2 W nodes tracking real-time noise across UBC, with TensorFlow's
              YAMNet classifying the noise source — so students can find a quiet place to study.</p>
-          <div class="tags"><span>Raspberry Pi</span><span>TensorFlow</span><span>IoT</span><span>NumPy</span></div>
+          <p class="proj-tags mono">Raspberry Pi · TensorFlow · IoT · NumPy</p>
         </article>
 
-        <article class="project-card tilt reveal" style="--d:5">
-          <div class="project-top">
-            <span class="award-badge">🥇 Top-5 in back-to-back jams</span>
+        <article class="project reveal span-3" style="--d:5">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. M</span>
+            <span class="award">2× top-5, back-to-back jams</span>
           </div>
-          <h3>Game Dev — Cell Fusion &amp; Blink</h3>
+          <h3>Cell Fusion &amp; Blink</h3>
           <p>Two complete games shipped under game-jam time limits:
              <a href="https://antgenix.itch.io/cell-fusion" target="_blank" rel="noopener">Cell Fusion</a>
              (puzzle-strategy, 5th of 81) and
              <a href="https://kasmeltz.itch.io/blink" target="_blank" rel="noopener">Blink</a>
              (narrative platformer with a time-blink mechanic, 4th of 86).</p>
-          <div class="tags"><span>Unity</span><span>C#</span><span>Game Jam</span><span>itch.io</span></div>
+          <p class="proj-tags mono">Unity · C# · Game Jam · itch.io</p>
         </article>
 
       </div>
-      <p class="projects-more reveal">
-        More on <a href="https://github.com/itsanantk" target="_blank" rel="noopener">GitHub →</a>
+      <p class="projects-more mono reveal">
+        More on <a href="https://github.com/itsanantk" target="_blank" rel="noopener">GitHub ↗</a>
       </p>
     </section>
 
     <!-- ============ SKILLS ============ -->
     <section class="section" id="skills">
-      <h2 class="section-title reveal"><span class="mono section-index">04.</span> Toolbox</h2>
-      <div class="skills-grid">
+      <div class="section-head reveal">
+        <p class="eyebrow">04 / Skills</p>
+        <h2 class="section-title">Toolbox</h2>
+      </div>
+      <div class="skills-layout">
+        <figure class="viewport reveal" id="globeViewport" style="--d:1">
+          <span class="hud hud-tr" aria-hidden="true">drag ⟳</span>
+          <canvas id="skillsGlobe" aria-hidden="true"></canvas>
+          <figcaption class="fig-caption mono">
+            <span class="fig-id">FIG. G</span>
+            <span class="fig-name">Toolbox</span>
+            <span class="fig-ctx">32 tools · drag to spin</span>
+          </figcaption>
+        </figure>
+        <div class="skills-grid">
         <div class="skill-group reveal" style="--d:0">
-          <h3 class="mono">hardware / RTL</h3>
-          <div class="chips">
-            <span>Verilog</span><span>SystemVerilog</span><span>Intel Quartus</span><span>QuestaSim</span>
-            <span>Platform Designer</span><span>ARM SoCs</span>
-          </div>
+          <h3 class="mono">Hardware / RTL</h3>
+          <p>Verilog · SystemVerilog · Intel Quartus · QuestaSim · Platform Designer · ARM SoCs</p>
         </div>
         <div class="skill-group reveal" style="--d:1">
-          <h3 class="mono">languages</h3>
-          <div class="chips">
-            <span>Python</span><span>C</span><span>C++</span><span>C#</span><span>Java</span>
-            <span>JavaScript</span><span>TypeScript</span><span>SQL</span><span>RISC-V Assembly</span><span>ARM Assembly</span>
-          </div>
+          <h3 class="mono">Languages</h3>
+          <p>Python · C · C++ · C# · Java · JavaScript · TypeScript · SQL · RISC-V &amp; ARM Assembly</p>
         </div>
         <div class="skill-group reveal" style="--d:2">
-          <h3 class="mono">frameworks</h3>
-          <div class="chips">
-            <span>Django / DRF</span><span>FastAPI</span><span>Celery</span>
-            <span>React</span><span>Next.js</span>
-            <span>PyTorch</span><span>TensorFlow</span><span>TensorRT</span><span>YOLO / Ultralytics</span>
-          </div>
+          <h3 class="mono">Frameworks</h3>
+          <p>Django / DRF · FastAPI · Celery · React · Next.js · PyTorch · TensorFlow · TensorRT · YOLO / Ultralytics</p>
         </div>
         <div class="skill-group reveal" style="--d:3">
-          <h3 class="mono">tools &amp; cloud</h3>
-          <div class="chips">
-            <span>Google Cloud Platform</span><span>Docker</span><span>PostgreSQL</span><span>MySQL</span>
-            <span>Supabase</span><span>Stripe</span><span>Playwright</span><span>Git</span><span>Linux</span>
-          </div>
+          <h3 class="mono">Tools &amp; Cloud</h3>
+          <p>Google Cloud Platform · Docker · PostgreSQL · MySQL · Supabase · Stripe · Playwright · Git · Linux</p>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- ============ CONTACT ============ -->
     <section class="section contact" id="contact">
-      <p class="mono section-index reveal">05. what's next</p>
-      <h2 class="contact-title reveal">Get in touch</h2>
-      <p class="contact-blurb reveal">
+      <div class="section-head reveal">
+        <p class="eyebrow">05 / Contact</p>
+        <h2 class="section-title">Get in touch</h2>
+      </div>
+      <p class="contact-blurb reveal" style="--d:1">
         Whether it's an opportunity, a collaboration, or you just want to talk FPGAs and neural nets —
-        my inbox is always open.
+        my inbox is always open. Or skip the formalities — open the terminal (bottom right, or below)
+        and type <code class="inline-cmd">sudo hire-anant</code>.
       </p>
-      <a class="btn btn-primary btn-lg reveal" href="mailto:itsanantk@gmail.com">Say hello</a>
-      <div class="contact-links reveal">
+      <div class="contact-actions reveal" style="--d:2">
+        <a class="btn-ink" href="mailto:itsanantk@gmail.com">Say hello</a>
+      </div>
+      <p class="contact-links mono reveal" style="--d:3">
         <a href="https://github.com/itsanantk" target="_blank" rel="noopener">GitHub</a>
-        <span aria-hidden="true">·</span>
+        <span aria-hidden="true">/</span>
         <a href="https://www.linkedin.com/in/itsanantk/" target="_blank" rel="noopener">LinkedIn</a>
-        <span aria-hidden="true">·</span>
+        <span aria-hidden="true">/</span>
         <a href="https://antgenix.itch.io/" target="_blank" rel="noopener">itch.io</a>
-        <span aria-hidden="true">·</span>
+        <span aria-hidden="true">/</span>
         <a href="Anant_Khanna_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      </p>
+
+      <div class="terminal reveal" id="terminal" style="--d:4">
+        <div class="term-bar mono">
+          <span class="term-title">anant@portfolio — AetherShell-lite</span>
+          <span class="term-hint">type help</span>
+          <button class="term-float-close" id="termFloatClose" aria-label="Close terminal">✕</button>
+        </div>
+        <div class="term-body mono" id="termBody" aria-label="Interactive terminal. Type help for commands.">
+          <div class="term-out">A tribute to <a href="https://github.com/itsanantk/AetherShell" target="_blank" rel="noopener">AetherShell</a>, my AI shell assistant.</div>
+          <div class="term-out">Type <span class="term-cmd">help</span> to see what I can do.</div>
+          <div class="term-line">
+            <label class="term-prompt" for="termInput">$</label>
+            <input id="termInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input" />
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer mono">
-    <p>designed &amp; built by Anant Khanna · <span id="year"></span></p>
+    <p>Designed &amp; built by Anant Khanna · <span id="year"></span></p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <button class="term-launcher mono" id="termLauncher" type="button"
+    aria-haspopup="true" aria-expanded="false" aria-controls="terminal">
+    <span class="term-launcher-dot" aria-hidden="true"></span>$ terminal
+  </button>
+
+  <div class="palette-scrim" id="paletteScrim" hidden>
+    <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="palette-input-row">
+        <span class="palette-prompt mono">$</span>
+        <input id="paletteInput" class="palette-input mono" type="text"
+          placeholder="jump to a section, run a command…"
+          autocomplete="off" autocapitalize="off" spellcheck="false"
+          aria-label="Command palette search" />
+        <span class="palette-esc mono">esc</span>
+      </div>
+      <ul class="palette-list mono" id="paletteList" role="listbox"></ul>
+    </div>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/hero3d.js"></script>
+  <script type="module" src="js/skills3d.js"></script>
 </body>
 </html>
