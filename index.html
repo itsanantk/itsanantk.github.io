@@ -121,7 +121,7 @@
         </div>
         <div class="about-stats">
           <div class="stat reveal" style="--d:1">
-            <span class="stat-num" data-count="98" data-suffix="%">0</span>
+            <span class="stat-num" data-count="95" data-suffix="%">0</span>
             <span class="stat-label">detection accuracy, UBC UAS vision pipeline</span>
           </div>
           <div class="stat reveal" style="--d:2">
@@ -172,7 +172,7 @@
         <div class="exp-body">
           <h3>ML Software Engineer Team Lead</h3>
           <ul>
-            <li>Real-time autonomous object detection (YOLOv11) on embedded systems moving at 50+ km/h — 98% detection accuracy, +30% mAP</li>
+            <li>Real-time autonomous object detection (YOLOv11) on embedded systems moving at 50+ km/h — 95% detection accuracy, +22% mAP</li>
             <li>Metric-learning re-identification with Vision Transformer embeddings, invariant to lighting and orientation</li>
             <li>TensorRT FP16 quantization: 50% less memory bandwidth within 0.5% of baseline precision</li>
           </ul>
@@ -285,6 +285,19 @@
              <a href="https://kasmeltz.itch.io/blink" target="_blank" rel="noopener">Blink</a>
              (narrative platformer with a time-blink mechanic, 4th of 86).</p>
           <p class="proj-tags mono">Unity · C# · Game Jam · itch.io</p>
+        </article>
+
+        <article class="project reveal span-6" style="--d:6">
+          <div class="project-top mono">
+            <span class="proj-fig">FIG. N</span>
+            <a class="proj-link" href="https://github.com/itsanantk/gpu-bench" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <h3>GPU Inference Benchmark</h3>
+          <p>Cross-stack inference benchmark isolating compilation gains from precision gains with a three-rung
+             ladder (PyTorch → TensorRT FP32 → FP16) on an RTX 3080, then ported to AMD's MI300X via ROCm/MIGraphX —
+             where an unoptimized PyTorch baseline already beats the fully-optimized TensorRT engine on raw
+             hardware scale, and MIGraphX FP16 scales to 7,277 fps with near-zero added latency per batch.</p>
+          <p class="proj-tags mono">Python · PyTorch · CUDA/TensorRT · ROCm/MIGraphX</p>
         </article>
 
       </div>
