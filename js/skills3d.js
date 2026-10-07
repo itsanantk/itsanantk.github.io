@@ -19,6 +19,7 @@ import * as THREE from "three";
     ["PyTorch", 1], ["TensorFlow", 1], ["TensorRT", 1], ["YOLO", 1], ["OpenCV", 1],
     ["Django", 2], ["FastAPI", 2], ["React", 2], ["Next.js", 2], ["Celery", 2],
     ["Verilog", 1], ["SystemVerilog", 1], ["FPGA", 1], ["ARM", 1], ["RISC-V", 1], ["Embedded", 1],
+    ["QuestaSim", 1], ["Quartus", 1], ["CUDA", 1], ["ROCm", 1],
     ["GCP", 2], ["Docker", 2], ["PostgreSQL", 2], ["Supabase", 2], ["Stripe", 2],
     ["Playwright", 2], ["Git", 0], ["Linux", 0], ["Unity", 1]
   ];

@@ -28,4 +28,4 @@ Pages on it). No build step needed.
 
 - **Roles in the hero typewriter** — `roles` array at the top of `js/main.js`
 - **Colors/fonts** — CSS custom properties in `:root` in `css/style.css`
-- **Resume** — replace `Anant_Khanna_Resume.pdf` (source lives in `Desktop\Jobs\Resume Source\`)
+- **Resume** — replace `Anant_Khanna_Resume.pdf` (source: `Desktop\Projects\jotopilot\data\packages\dv-general\Anant_Khanna_Resume.tex`, the company-neutral DV resume)

@@ -53,11 +53,11 @@
 
   /* ---------- figure viewport: cycle shapes + captions ---------- */
   const figures = [
-    { shape: "stack", id: "FIG. A", name: "Order & pricing systems", ctx: "Software Engineer — Agriprix" },
+    { shape: "chip", id: "FIG. A", name: "Neural-net accelerator", ctx: "SystemVerilog — DE1-SoC FPGA" },
     { shape: "atom", id: "FIG. B", name: "Computer engineering", ctx: "BASc — UBC, Dean's List" },
     { shape: "drone", id: "FIG. C", name: "Autonomous vision", ctx: "ML Lead — UBC UAS" },
-    { shape: "chip", id: "FIG. D", name: "Neural-net accelerator", ctx: "Verilog — DE1-SoC FPGA" },
-    { shape: "pin", id: "FIG. E", name: "Live campus map", ctx: "Co-founder — UBC Finds" },
+    { shape: "stack", id: "FIG. D", name: "Order & pricing systems", ctx: "Founding Software Engineer — Agriprix" },
+    { shape: "pin", id: "FIG. E", name: "Live campus map", ctx: "Lead Developer — UBC Finds" },
     { shape: "gamepad", id: "FIG. F", name: "Games", ctx: "2× top-5 game jams" }
   ];
   const viewport = document.getElementById("figViewport");
@@ -108,11 +108,11 @@
       countObserver.unobserve(el);
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || "";
-      if (reducedMotion) { el.textContent = target + suffix; return; }
+      if (reducedMotion) { el.textContent = target.toLocaleString("en-US") + suffix; return; }
       const dur = 1200, start = performance.now();
       const step = now => {
         const t = Math.min((now - start) / dur, 1);
-        el.textContent = Math.round(easeOut(t) * target) + suffix;
+        el.textContent = Math.round(easeOut(t) * target).toLocaleString("en-US") + suffix;
         if (t < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -152,7 +152,9 @@
     };
     const sections = ["about", "experience", "projects", "skills", "contact"];
     const GITLOG = [
-      ["a1f9c3e", "(HEAD -&gt; main) feat: WhatsApp AI assistant on Business Cloud API"],
+      ["e4c7b92", "(HEAD -&gt; main) chore: sign AMD design verification co-op offer — chiplet interconnect team, 2027"],
+      ["3f8d0a5", "test: self-checking SystemVerilog testbenches in QuestaSim, CPU + FSM + synchronizer (CPEN 211)"],
+      ["a1f9c3e", "feat: WhatsApp AI assistant on Business Cloud API"],
       ["5d0e21b", "feat: Stripe authorize-and-capture checkout + idempotency keys"],
       ["c7b4a10", "fix: eliminate overselling races via row-level locking"],
       ["99ac0d4", "security: audit surfaces 67 vulns (5 critical) — all patched"],
@@ -160,8 +162,9 @@
       ["2b8f5c1", "test: 15-case Playwright E2E suite, supplier → buyer journey"],
       ["7e3d901", "feat: campus utility map, Supabase realtime sync (UBC Finds)"],
       ["c04f882", "perf: TensorRT FP16 quantization, 50% less memory bandwidth (UBC UAS)"],
-      ["918aa3f", "feat: real-time YOLOv11 detection @ 50km/h, 98% accuracy (UBC UAS)"],
-      ["5a2e7b0", "feat: Verilog neural-net accelerator, 300% speedup (FPGA project)"],
+      ["918aa3f", "feat: real-time YOLOv11 detection @ 50km/h on Jetson Orin Nano, 95% accuracy (UBC UAS)"],
+      ["5a2e7b0", "fix: pipeline-drain bug found by waveform analysis — add drain state (FPGA accelerator)"],
+      ["2d9c7f3", "feat: pipelined SystemVerilog MAC accelerator, 3,000 inf/s, 300% speedup (FPGA project)"],
       ["0c1d4e6", "chore: enrolled, Computer Engineering @ UBC"]
     ].map(([hash, msg]) => `<span class='term-cmd'>${hash}</span> ${msg}`).join("\n");
     const commands = {
@@ -185,8 +188,8 @@
         ].join("\n")
       ),
       whoami: () => print(
-        "Anant Khanna — Software Engineer @ Agriprix · Computer Engineering @ UBC.\n" +
-        "Builds intelligent systems from silicon up: FPGA gates → neural nets → full-stack apps."
+        "Anant Khanna — Computer Engineering @ UBC · incoming Design Verification Intern @ AMD (2027).\n" +
+        "Works where hardware meets software: SystemVerilog testbenches → GPU inference → full-stack apps."
       ),
       ls: () => print("about/   experience/   projects/   skills/   contact/"),
       "ls -la": () => print(
@@ -196,7 +199,7 @@
         "drwxr-xr-x  6 anant eng   4096 projects/\n" +
         "drwxr-xr-x  4 anant eng   4096 skills/\n" +
         "drwxr-xr-x  2 anant eng   4096 contact/\n" +
-        "-rw-r--r--  1 anant eng   129k Anant_Khanna_Resume.pdf"
+        "-rw-r--r--  1 anant eng   177k Anant_Khanna_Resume.pdf"
       ),
       "ls -l": () => commands["ls -la"](),
       "ls -a": () => commands["ls -la"](),
@@ -225,16 +228,19 @@
         "itch.io:  <a href='https://antgenix.itch.io/' target='_blank' rel='noopener'>antgenix.itch.io</a>"
       ),
       skills: () => print(
-        "hardware:   Verilog, SystemVerilog, ARM SoCs\n" +
-        "languages:  Python, C/C++, C#, Java, JS/TS, SQL\n" +
-        "frameworks: Django, FastAPI, React, Next.js, PyTorch, TensorFlow, TensorRT\n" +
-        "cloud:      GCP, Docker, PostgreSQL, Supabase, Stripe, Playwright"
+        "hardware:     SystemVerilog, Verilog, Quartus, QuestaSim, ARM SoCs\n" +
+        "verification: self-checking testbenches, reference models, waveform debug, UVM fundamentals\n" +
+        "languages:    Python, C/C++, C#, Java, JS/TS, SQL\n" +
+        "gpu/ml:       PyTorch, TensorFlow, CUDA/TensorRT, ROCm/MIGraphX, YOLO\n" +
+        "frameworks:   Django, FastAPI, React, Next.js\n" +
+        "cloud:        GCP, Docker, PostgreSQL, Supabase, Stripe, Playwright"
       ),
       experience: () => {
         const rows = [
-          ["Software Engineer", "Agriprix", "May 2026 — Present"],
-          ["ML SWE Team Lead", "UBC UAS", "Sept 2024 — Present"],
-          ["Co-founder & Lead Dev", "UBC Finds", "Oct 2025 — Present"],
+          ["Incoming DV Engineering Intern", "AMD", "May 2027 — Dec 2027"],
+          ["Founding Software Engineer", "Agriprix", "May 2026 — Aug 2026"],
+          ["Machine Learning Team Lead", "UBC UAS", "Sept 2024 — Present"],
+          ["Lead Developer", "UBC Finds", "Oct 2025 — Present"],
           ["Programming Instructor", "Code Ninjas", "May 2025 — Aug 2025"]
         ];
         const w1 = Math.max(...rows.map(r => r[0].length)) + 2;
@@ -245,8 +251,11 @@
         );
       },
       stats: () => print(
-        "98%    detection accuracy — UBC UAS vision pipeline\n" +
-        "300%   speedup — FPGA neural-net accelerator\n" +
+        "3,000  inferences/sec — FPGA neural-net accelerator\n" +
+        "300%   speedup over ARM-only execution — same accelerator\n" +
+        "7,277  fps — MIGraphX FP16 on an AMD MI300X, batch 8\n" +
+        "8      month design verification co-op at AMD, starting May 2027\n" +
+        "95%    detection accuracy — UBC UAS vision pipeline\n" +
         "120+   students taught to code — Code Ninjas\n" +
         "2×     top-5 game jam finishes\n" +
         "67     vulnerabilities patched in one security audit (5 critical)\n" +
@@ -262,10 +271,10 @@
           "<span class='term-cmd'>anant</span>@<span class='term-cmd'>portfolio</span>",
           "──────────────────",
           "OS:         Human, v24 (Vancouver, BC)",
-          "Role:       Software Engineer @ Agriprix",
-          "Education:  BASc Computer Engineering — UBC (Dean's List)",
-          "Also:       ML Lead @ UBC UAS · Co-founder @ UBC Finds",
-          "Stack:      Python · TypeScript · C++ · Verilog",
+          "Role:       Incoming Design Verification Intern @ AMD (May 2027)",
+          "Education:  BASc Computer Engineering (Co-op) — UBC (Dean's List)",
+          "Also:       ML Lead @ UBC UAS · Lead Dev @ UBC Finds · ex-Agriprix",
+          "Stack:      SystemVerilog · Python · C++ · TypeScript",
           "Shell:      AetherShell-lite (tribute build)",
           "Status:     <span class='term-cmd'>open to opportunities</span>"
         ].join("\n")
