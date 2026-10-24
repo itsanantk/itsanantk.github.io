@@ -62,8 +62,12 @@
     pending.clear();
   };
 
+  // Kill switch: the model produced gibberish and froze the page on the first
+  // real-hardware test. Flip to true to re-enable preloading.
+  const ENABLED = false;
+
   const start = async () => {
-    if (!(await capable())) return;
+    if (!ENABLED || !(await capable())) return;
     ai.state = "waiting";
     const begin = async () => {
       ai.state = "loading";
