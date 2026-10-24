@@ -6,7 +6,7 @@
 (() => {
   "use strict";
 
-  const ENDPOINT = ""; // paste the Apps Script web-app URL here
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbyp5h6sjVgz6SmVLBnsU_66z7NSqeugNUWVuzgC3FJaH0fksF6cLODmw9fKlGwLv5ac6g/exec";
 
   const sid = (() => {
     try {
