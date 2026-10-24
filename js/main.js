@@ -350,6 +350,7 @@
       if (!cmd) return;
       history.unshift(cmd);
       histIdx = -1;
+      if (window.akLog) window.akLog("cmd", cmd);
       const key = cmd.toLowerCase().replace(/\s+/g, " ");
       const handler = commands[key];
       if (handler) { handler(); return; }
