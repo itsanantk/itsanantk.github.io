@@ -11,7 +11,7 @@
 
   // [pattern, result]; result is { cmd } (run an existing command) or { text } (print html)
   const INTENTS = [
-    [/^(hi|hello|hey|yo|sup|hola|howdy|hiya)\b/, () => ({ text: pick([
+    [/^(h+i+|h+e+l+o+|h+e+y+|yo+|sup|hola|howdy|hiya|good ?(morning\w*|afternoon|evening|night)|gm|morning\w*)(?![a-z])/, () => ({ text: pick([
       "hey 👋 type <span class='term-cmd'>help</span> to see what this shell can do.",
       "hello! try <span class='term-cmd'>whoami</span>, or just ask me something.",
       "hi there — <span class='term-cmd'>skills</span>, <span class='term-cmd'>experience</span>, or <span class='term-cmd'>contact</span>?"
