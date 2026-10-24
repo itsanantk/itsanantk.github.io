@@ -379,7 +379,37 @@
         if (sections.includes(target)) { goTo(target); return; }
         if (/^(cd|open|goto) /.test(key)) { print(`cd: no such directory: ${esc(target)}`); return; }
       }
+      /* rules first (short phrases, typos), then the in-browser model */
+      const intent = window.akIntents && window.akIntents.match(key);
+      if (intent) { if (intent.cmd) commands[intent.cmd](); else print(intent.text); return; }
+      const near = window.akIntents && window.akIntents.nearest(key, COMPLETIONS);
+      if (near) {
+        print(`command not found: ${esc(cmd)} — did you mean <span class='term-cmd'>${near}</span>?`);
+        return;
+      }
+      askAI(cmd);
+    };
+    const notFound = cmd =>
       print(`command not found: ${esc(cmd)} — try <span class='term-cmd'>help</span>`);
+    const askAI = async cmd => {
+      const ai = window.akAI;
+      if (!ai || ai.state === "off" || ai.state === "error") { notFound(cmd); return; }
+      if (ai.state !== "ready") {
+        print(`the assistant is still warming up (${ai.progress}%) — try <span class='term-cmd'>help</span> for now`);
+        return;
+      }
+      const out = document.createElement("div");
+      out.className = "term-out";
+      out.textContent = "thinking…";
+      termBody.insertBefore(out, termLine);
+      try {
+        const answer = await ai.ask(cmd);
+        out.textContent = answer;
+        if (window.akLog) window.akLog("ai", `Q: ${cmd} | A: ${answer}`);
+      } catch (_) {
+        out.textContent = "the assistant hiccuped — try help";
+      }
+      termBody.scrollTop = termBody.scrollHeight;
     };
     const COMPLETIONS = [
       "help", "whoami", "ls", "cd", "experience", "skills", "stats", "resume",
