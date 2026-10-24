@@ -403,9 +403,10 @@
       out.textContent = "thinking…";
       termBody.insertBefore(out, termLine);
       try {
-        const answer = await ai.ask(cmd);
-        out.textContent = answer;
-        if (window.akLog) window.akLog("ai", `Q: ${cmd} | A: ${answer}`);
+        const res = await ai.ask(cmd);
+        if (res.html) out.innerHTML = res.text; else out.textContent = res.text;
+        // mode tells the Sheet whether the model answered or the fact fallback fired
+        if (window.akLog) window.akLog("ai", `[${res.mode}] Q: ${cmd} | A: ${res.text}`);
       } catch (_) {
         out.textContent = "the assistant hiccuped — try help";
       }

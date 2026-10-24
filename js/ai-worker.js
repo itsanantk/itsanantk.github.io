@@ -10,7 +10,8 @@ self.onmessage = async ({ data }) => {
       const files = {};
       generator = await pipeline("text-generation", MODEL, {
         device: "webgpu",
-        dtype: "q4f16",
+        // not q4f16: its 16-bit math produced gibberish on Intel Xe integrated GPUs
+        dtype: "q4",
         progress_callback: p => {
           if (p.status !== "progress" || !p.total) return;
           files[p.file] = [p.loaded, p.total];
@@ -20,6 +21,9 @@ self.onmessage = async ({ data }) => {
           self.postMessage({ type: "progress", value: Math.min(99, Math.round((loaded / total) * 100)) });
         }
       });
+      // the first generation compiles GPU shaders and can take a minute on
+      // integrated GPUs; do it now so a visitor's first question is fast
+      await generator([{ role: "user", content: "hi" }], { max_new_tokens: 2, do_sample: false });
       self.postMessage({ type: "ready" });
     } catch (err) {
       self.postMessage({ type: "error", message: String(err) });
@@ -27,7 +31,7 @@ self.onmessage = async ({ data }) => {
   } else if (data.type === "ask") {
     try {
       const out = await generator(data.messages, {
-        max_new_tokens: 80,
+        max_new_tokens: 60,
         do_sample: false,
         repetition_penalty: 1.1
       });
