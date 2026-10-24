@@ -23,7 +23,7 @@
     if (!ENDPOINT) return;
     const body = JSON.stringify({
       type,
-      text: String(text).slice(0, 200),
+      text: String(text).slice(0, type === "ai" ? 800 : 200),
       sid,
       path: location.pathname,
       ref: document.referrer.slice(0, 200),
