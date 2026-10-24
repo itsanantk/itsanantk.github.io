@@ -9,9 +9,6 @@
 (() => {
   "use strict";
 
-  const LIB = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
-  const MODEL = "onnx-community/Qwen2.5-0.5B-Instruct";
-
   const SYSTEM =
     "You are the assistant inside Anant Khanna's portfolio terminal. " +
     "Answer in 1-3 short plain sentences, in third person, using ONLY the facts below. " +
@@ -44,7 +41,25 @@
     if (conn && (conn.saveData || conn.type === "cellular" || /(^|-)[23]g$/.test(conn.effectiveType || ""))) return false;
     if (navigator.deviceMemory && navigator.deviceMemory < 4) return false;
     if (window.matchMedia("(pointer: coarse)").matches) return false; // phones / tablets
-    try { return !!(await navigator.gpu.requestAdapter()); } catch (_) { return false; }
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      // a software adapter would run the model on the CPU and crawl
+      return !!adapter && !adapter.isFallbackAdapter && !(adapter.info && adapter.info.isFallbackAdapter);
+    } catch (_) { return false; }
+  };
+
+  const FIRST_ASK_TIMEOUT_MS = 60000; // first run compiles GPU shaders
+  const ASK_TIMEOUT_MS = 25000;
+  let warm = false;
+  let worker = null;
+  let nextId = 1;
+  const pending = new Map();
+
+  const fail = () => {
+    ai.state = "error";
+    if (worker) { worker.terminate(); worker = null; }
+    pending.forEach(p => p.resolve("that took too long — try a simpler question, or type help."));
+    pending.clear();
   };
 
   const start = async () => {
@@ -53,40 +68,40 @@
     const begin = async () => {
       ai.state = "loading";
       try {
-        const { pipeline } = await import(LIB);
-        const files = {};
-        const generator = await pipeline("text-generation", MODEL, {
-          device: "webgpu",
-          dtype: "q4f16",
-          progress_callback: p => {
-            if (p.status !== "progress" || !p.total) return;
-            files[p.file] = [p.loaded, p.total];
-            const vals = Object.values(files);
-            const loaded = vals.reduce((a, v) => a + v[0], 0);
-            const total = vals.reduce((a, v) => a + v[1], 0);
-            ai.progress = Math.min(99, Math.round((loaded / total) * 100));
-          }
+        worker = new Worker("js/ai-worker.js", { type: "module" });
+      } catch (_) { ai.state = "error"; return; }
+      worker.onerror = () => fail();
+      worker.onmessage = ({ data }) => {
+        if (data.type === "progress") ai.progress = data.value;
+        else if (data.type === "ready") { ai.state = "ready"; ai.progress = 100; }
+        else if (data.type === "error") fail();
+        else if (data.type === "answer") {
+          const p = pending.get(data.id);
+          if (!p) return;
+          pending.delete(data.id);
+          clearTimeout(p.timer);
+          warm = true;
+          p.resolve(data.error ? "the assistant hiccuped — try help" : (data.text || "no answer."));
+        }
+      };
+      worker.postMessage({ type: "load" });
+      ai.ask = question => {
+        if (pending.size) return Promise.resolve("one question at a time, please.");
+        return new Promise(resolve => {
+          const id = nextId++;
+          // a stuck generation kills the worker so it can't keep eating the GPU
+          const timer = setTimeout(fail, warm ? ASK_TIMEOUT_MS : FIRST_ASK_TIMEOUT_MS);
+          pending.set(id, { resolve, timer });
+          worker.postMessage({
+            type: "ask",
+            id,
+            messages: [
+              { role: "system", content: SYSTEM },
+              { role: "user", content: String(question).slice(0, 300) }
+            ]
+          });
         });
-        let busy = false;
-        ai.ask = async question => {
-          if (busy) return "one question at a time, please.";
-          busy = true;
-          try {
-            const out = await generator(
-              [
-                { role: "system", content: SYSTEM },
-                { role: "user", content: String(question).slice(0, 300) }
-              ],
-              { max_new_tokens: 120, do_sample: false, repetition_penalty: 1.1 }
-            );
-            return String(out[0].generated_text.at(-1).content).trim() || "no answer.";
-          } finally { busy = false; }
-        };
-        ai.state = "ready";
-        ai.progress = 100;
-      } catch (_) {
-        ai.state = "error";
-      }
+      };
     };
     // wait for the page to settle so the portfolio itself loads first
     if ("requestIdleCallback" in window) requestIdleCallback(begin, { timeout: 4000 });
