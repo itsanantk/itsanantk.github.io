@@ -17,6 +17,17 @@
       "hi there — <span class='term-cmd'>skills</span>, <span class='term-cmd'>experience</span>, or <span class='term-cmd'>contact</span>?"
     ]) })],
     [/\b(thanks?|thank you|thx|ty)\b/, () => ({ text: pick(["anytime.", "np 🙂", "glad it helped."]) })],
+    [/\b(ily+|love (you|u)|luv (you|u)|i love (you|u))\b/, () => ({ text: pick([
+      "aww 🥹 i'm a shell script with feelings. type <span class='term-cmd'>contact</span> if you want to tell the human.",
+      "that's the nicest thing anyone's piped into stdin today."
+    ]) })],
+    [/\b(wh?ats? ?up+|wassup+|sup+|what'?s new)\b/, () => ({ text: pick([
+      "not much, just parsing commands. you?",
+      "idling at a prompt, waiting for someone interesting. hi 👋"
+    ]) })],
+    [/\bhow (are|r) (you|u|ya)\b|\bhru\b/, () => ({ text: "running smoothly, zero known regressions today. how about you?" })],
+    [/\b(your|ur) name\b|\bwho are (you|u)\b|\bwhat are (you|u)\b/, () => ({ text: "i'm AetherShell-lite, the little terminal on Anant's portfolio. for the human behind it, try <span class='term-cmd'>whoami</span>." })],
+    [/\b(lol|lmao|haha+|hehe+)\b/, () => ({ text: pick(["😄", "glad that landed.", "i'll take it."]) })],
     [/^(bye|goodbye|cya|see ya|quit|logout|logoff)\b/, () => ({ text: "you can leave, but the résumé stays. <span class='term-cmd'>resume</span>" })],
     [/\b(hire|hiring|recruit|available|opportunit|open to work)/, () => ({ cmd: "sudo hire-anant" })],
     [/\bamd\b/, () => ({ text: "Anant signed on as a Design Verification intern at AMD (NBIO / chiplet interconnect), Vancouver, May–Dec 2027. <span class='term-cmd'>experience</span> has the rest." })],

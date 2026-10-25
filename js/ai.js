@@ -41,7 +41,23 @@
       "AetherShell is Anant's own personal side project, an AI shell assistant. It is not related to Agriprix or any employer. This terminal is a tribute build of it."]
   ];
 
-  const OFF_TOPIC = "I only know about Anant's background — try <span class='term-cmd'>help</span>, or email itsanantk@gmail.com.";
+  // No fact matched: chat casually, but never make claims about Anant.
+  const CHAT_PROMPT =
+    "You are AetherShell-lite, a friendly, slightly witty assistant living in a terminal on Anant Khanna's portfolio website. " +
+    "Reply to casual conversation in ONE short, lowercase, casual sentence. " +
+    "You know nothing about Anant beyond this site: if asked about him, say to type help. " +
+    "Never state facts, numbers, names or dates about any person.";
+
+  // Casual chat should contain no numbers and no proper nouns except our own names.
+  const CHAT_CAPS = new Set(["i", "i'm", "i'll", "i've", "i'd", "aethershell", "aethershell-lite", "anant", "khanna"]);
+  const chatSafe = text => {
+    const t = String(text).trim();
+    if (!t || t.length > 220 || /\d/.test(t)) return false;
+    const stripped = t.replace(/(^|[.!?]\s+)([A-Z])/g, (_, a, b) => a + b.toLowerCase());
+    return !(stripped.match(/\b[A-Z][A-Za-z'-]*/g) || []).some(w => !CHAT_CAPS.has(w.toLowerCase()));
+  };
+
+  const OFF_TOPIC ="I only know about Anant's background — try <span class='term-cmd'>help</span>, or email itsanantk@gmail.com.";
 
   const words = s => String(s).toLowerCase().match(/[a-z0-9+#.]+/g) || [];
 
@@ -134,6 +150,12 @@
           warm = true;
           if (data.error) { p.resolve({ mode: "error", text: "the assistant hiccuped — try help" }); return; }
           const answer = (data.text || "").trim();
+          if (!p.chosen.length) {
+            p.resolve(chatSafe(answer)
+              ? { mode: "chat", text: answer }
+              : { mode: "offtopic", text: OFF_TOPIC, html: true });
+            return;
+          }
           p.resolve(answer && grounded(answer, p.chosen, p.question)
             ? { mode: "model", text: answer }
             : { mode: "fact", text: p.chosen[0].text });
@@ -143,8 +165,6 @@
       ai.ask = question => {
         if (pending.size) return Promise.resolve({ mode: "busy", text: "one question at a time, please." });
         const chosen = retrieve(question);
-        // nothing relevant to ask the model about: don't spend GPU time on it
-        if (!chosen.length) return Promise.resolve({ mode: "offtopic", text: OFF_TOPIC, html: true });
         return new Promise(resolve => {
           const id = nextId++;
           // a stuck generation kills the worker so it can't keep eating the GPU
@@ -154,7 +174,7 @@
             type: "ask",
             id,
             messages: [
-              { role: "system", content: buildSystem(chosen) },
+              { role: "system", content: chosen.length ? buildSystem(chosen) : CHAT_PROMPT },
               { role: "user", content: String(question).slice(0, 300) }
             ]
           });
