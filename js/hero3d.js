@@ -337,6 +337,8 @@ import * as THREE from "three";
     if (!running) return;
     const dt = Math.min((now - lastTime) / 1000, 0.05);
     lastTime = now;
+    // the in-browser assistant shares this GPU; yield to it while it works
+    if (window.akBusy) { requestAnimationFrame(frame); return; }
     const time = now / 1000;
 
     if (morphT < 1) morphT = Math.min(morphT + dt / 1.15, 1);

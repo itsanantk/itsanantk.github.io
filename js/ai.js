@@ -122,11 +122,32 @@
   let nextId = 1;
   const pending = new Map();
 
+  // 3D scenes (hero3d / skills3d) pause while this is true: GPU init and
+  // generation are the heavy moments, and they share one integrated GPU
+  const setBusy = () => {
+    window.akBusy = (ai.state === "loading" && ai.progress >= 99) || pending.size > 0;
+  };
+
+  // give the memory back after a few idle minutes; wake() reloads from cache
+  const IDLE_UNLOAD_MS = 4 * 60 * 1000;
+  let idleTimer = null;
+  const touch = () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (pending.size) { touch(); return; }
+      if (worker) { worker.terminate(); worker = null; }
+      ai.state = "asleep";
+      setBusy();
+    }, IDLE_UNLOAD_MS);
+  };
+
   const fail = () => {
     ai.state = "error";
+    clearTimeout(idleTimer);
     if (worker) { worker.terminate(); worker = null; }
     pending.forEach(p => p.resolve({ mode: "error", text: "that took too long — try a simpler question, or type help." }));
     pending.clear();
+    setBusy();
   };
 
   const start = async () => {
@@ -139,8 +160,8 @@
       } catch (_) { ai.state = "error"; return; }
       worker.onerror = () => fail();
       worker.onmessage = ({ data }) => {
-        if (data.type === "progress") ai.progress = data.value;
-        else if (data.type === "ready") { ai.state = "ready"; ai.progress = 100; }
+        if (data.type === "progress") { ai.progress = data.value; setBusy(); }
+        else if (data.type === "ready") { ai.state = "ready"; ai.progress = 100; setBusy(); touch(); }
         else if (data.type === "error") fail();
         else if (data.type === "answer") {
           const p = pending.get(data.id);
@@ -148,6 +169,8 @@
           pending.delete(data.id);
           clearTimeout(p.timer);
           warm = true;
+          setBusy();
+          touch();
           if (data.error) { p.resolve({ mode: "error", text: "the assistant hiccuped — try help" }); return; }
           const answer = (data.text || "").trim();
           if (!p.chosen.length) {
@@ -170,6 +193,7 @@
           // a stuck generation kills the worker so it can't keep eating the GPU
           const timer = setTimeout(fail, warm ? ASK_TIMEOUT_MS : FIRST_ASK_TIMEOUT_MS);
           pending.set(id, { resolve, timer, chosen, question });
+          setBusy();
           worker.postMessage({
             type: "ask",
             id,
@@ -180,6 +204,12 @@
           });
         });
       };
+    };
+    ai.wake = () => {
+      if (ai.state !== "asleep") return;
+      ai.progress = 0;
+      warm = false;
+      begin();
     };
     // wait for the page to settle so the portfolio itself loads first
     if ("requestIdleCallback" in window) requestIdleCallback(begin, { timeout: 4000 });
