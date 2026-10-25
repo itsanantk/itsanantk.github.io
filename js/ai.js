@@ -50,9 +50,27 @@
 
   // Casual chat should contain no numbers and no proper nouns except our own names.
   const CHAT_CAPS = new Set(["i", "i'm", "i'll", "i've", "i'd", "aethershell", "aethershell-lite", "anant", "khanna"]);
+  // Every name in FACTS (Agriprix, AMD, UBC, Stripe, ...), derived automatically
+  // so it can never go stale: a word counts as a name if it has a capital that is
+  // not just a sentence start. Matched case-insensitively, since the model writes
+  // in lowercase. Our own names stay allowed.
+  const FACT_NAMES = (() => {
+    const names = new Set();
+    for (const [, text] of FACTS) {
+      for (const m of text.matchAll(/[A-Za-z0-9+#][A-Za-z0-9+#.'-]*/g)) {
+        const w = m[0].replace(/[.'-]+$/, "");
+        const sentenceStart = /(^|[.!?]\s+)$/.test(text.slice(0, m.index));
+        if (/[A-Z]/.test(w.slice(1)) || (/^[A-Z]/.test(w) && !sentenceStart)) names.add(w.toLowerCase());
+      }
+    }
+    ["anant", "khanna", "aethershell", "aethershell-lite", "i"].forEach(n => names.delete(n));
+    return names;
+  })();
+
   const chatSafe = text => {
     const t = String(text).trim();
     if (!t || t.length > 220 || /\d/.test(t)) return false;
+    if ((t.toLowerCase().match(/[a-z0-9+#]+/g) || []).some(w => FACT_NAMES.has(w))) return false;
     const stripped = t.replace(/(^|[.!?]\s+)([A-Z])/g, (_, a, b) => a + b.toLowerCase());
     return !(stripped.match(/\b[A-Z][A-Za-z'-]*/g) || []).some(w => !CHAT_CAPS.has(w.toLowerCase()));
   };
@@ -96,7 +114,7 @@
   };
 
   const ai = {
-    state: "off",        // off | waiting | loading | ready | error
+    state: "off",        // off | idle | loading | ready | asleep | error
     progress: 0,
     ask: async () => { throw new Error("assistant not ready"); }
   };
@@ -122,16 +140,37 @@
   let nextId = 1;
   const pending = new Map();
 
+  // 3D scenes (hero3d / skills3d) pause while this is true: GPU init and
+  // generation are the heavy moments, and they share one integrated GPU
+  const setBusy = () => {
+    window.akBusy = (ai.state === "loading" && ai.progress >= 99) || pending.size > 0;
+  };
+
+  // give the memory back after a few idle minutes; wake() reloads from cache
+  const IDLE_UNLOAD_MS = 4 * 60 * 1000;
+  let idleTimer = null;
+  const touch = () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (pending.size) { touch(); return; }
+      if (worker) { worker.terminate(); worker = null; }
+      ai.state = "asleep";
+      setBusy();
+    }, IDLE_UNLOAD_MS);
+  };
+
   const fail = () => {
     ai.state = "error";
+    clearTimeout(idleTimer);
     if (worker) { worker.terminate(); worker = null; }
     pending.forEach(p => p.resolve({ mode: "error", text: "that took too long — try a simpler question, or type help." }));
     pending.clear();
+    setBusy();
   };
 
-  const start = async () => {
+  const init = async () => {
     if (!(await capable())) return;
-    ai.state = "waiting";
+    ai.state = "idle"; // capable, but nothing downloads until someone goes near the terminal
     const begin = async () => {
       ai.state = "loading";
       try {
@@ -139,8 +178,8 @@
       } catch (_) { ai.state = "error"; return; }
       worker.onerror = () => fail();
       worker.onmessage = ({ data }) => {
-        if (data.type === "progress") ai.progress = data.value;
-        else if (data.type === "ready") { ai.state = "ready"; ai.progress = 100; }
+        if (data.type === "progress") { ai.progress = data.value; setBusy(); }
+        else if (data.type === "ready") { ai.state = "ready"; ai.progress = 100; setBusy(); touch(); }
         else if (data.type === "error") fail();
         else if (data.type === "answer") {
           const p = pending.get(data.id);
@@ -148,6 +187,8 @@
           pending.delete(data.id);
           clearTimeout(p.timer);
           warm = true;
+          setBusy();
+          touch();
           if (data.error) { p.resolve({ mode: "error", text: "the assistant hiccuped — try help" }); return; }
           const answer = (data.text || "").trim();
           if (!p.chosen.length) {
@@ -170,6 +211,7 @@
           // a stuck generation kills the worker so it can't keep eating the GPU
           const timer = setTimeout(fail, warm ? ASK_TIMEOUT_MS : FIRST_ASK_TIMEOUT_MS);
           pending.set(id, { resolve, timer, chosen, question });
+          setBusy();
           worker.postMessage({
             type: "ask",
             id,
@@ -181,11 +223,30 @@
         });
       };
     };
-    // wait for the page to settle so the portfolio itself loads first
-    if ("requestIdleCallback" in window) requestIdleCallback(begin, { timeout: 4000 });
-    else setTimeout(begin, 2500);
+    ai.wake = () => {
+      if (ai.state !== "asleep") return;
+      ai.progress = 0;
+      warm = false;
+      begin();
+    };
+    ai.start = () => { if (ai.state === "idle") begin(); };
+
+    // Lazy load: most visitors never touch the terminal, so only start the
+    // download when one gets close to it (scroll near it, or hover/click the
+    // launcher, or focus the input). Rules answer in the meantime.
+    const arm = () => ai.start();
+    const terminal = document.getElementById("terminal");
+    if (terminal && "IntersectionObserver" in window) {
+      new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) arm();
+      }, { rootMargin: "300px" }).observe(terminal);
+    }
+    const launcher = document.getElementById("termLauncher");
+    ["pointerenter", "focus", "click"].forEach(ev => launcher && launcher.addEventListener(ev, arm, { once: true }));
+    const input = document.getElementById("termInput");
+    if (input) input.addEventListener("focus", arm, { once: true });
   };
 
-  if (document.readyState === "complete") start();
-  else window.addEventListener("load", start, { once: true });
+  if (document.readyState === "complete") init();
+  else window.addEventListener("load", init, { once: true });
 })();

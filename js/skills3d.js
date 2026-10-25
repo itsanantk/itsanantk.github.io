@@ -178,6 +178,8 @@ import * as THREE from "three";
   /* ---------- loop (paused offscreen) ---------- */
   const frame = () => {
     if (!running) return;
+    // the in-browser assistant shares this GPU; yield to it while it works
+    if (window.akBusy) { requestAnimationFrame(frame); return; }
     if (!dragging) {
       group.rotation.y += vx;
       group.rotation.x += vy;

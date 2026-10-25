@@ -1,7 +1,8 @@
 /* Runs the model off the main thread so the page never freezes. */
 import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
 
-const MODEL = "onnx-community/Qwen2.5-0.5B-Instruct";
+// 360M params, 386 MB at q4 (the 0.5B Qwen was 786 MB and ~4 GB resident)
+const MODEL = "onnx-community/SmolLM2-360M-Instruct-ONNX";
 let generator = null;
 
 self.onmessage = async ({ data }) => {

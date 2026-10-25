@@ -394,6 +394,12 @@
     const askAI = async cmd => {
       const ai = window.akAI;
       if (!ai || ai.state === "off" || ai.state === "error") { notFound(cmd); return; }
+      if (ai.state === "asleep") {
+        ai.wake();
+        print("waking the assistant back up (about 30s) — try <span class='term-cmd'>help</span> for now, then ask again");
+        return;
+      }
+      if (ai.state === "idle") ai.start();
       if (ai.state !== "ready") {
         print(`the assistant is still warming up (${ai.progress}%) — try <span class='term-cmd'>help</span> for now`);
         return;
