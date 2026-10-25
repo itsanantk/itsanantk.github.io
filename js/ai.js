@@ -114,7 +114,7 @@
   };
 
   const ai = {
-    state: "off",        // off | waiting | loading | ready | error
+    state: "off",        // off | idle | loading | ready | asleep | error
     progress: 0,
     ask: async () => { throw new Error("assistant not ready"); }
   };
@@ -168,9 +168,9 @@
     setBusy();
   };
 
-  const start = async () => {
+  const init = async () => {
     if (!(await capable())) return;
-    ai.state = "waiting";
+    ai.state = "idle"; // capable, but nothing downloads until someone goes near the terminal
     const begin = async () => {
       ai.state = "loading";
       try {
@@ -229,11 +229,24 @@
       warm = false;
       begin();
     };
-    // wait for the page to settle so the portfolio itself loads first
-    if ("requestIdleCallback" in window) requestIdleCallback(begin, { timeout: 4000 });
-    else setTimeout(begin, 2500);
+    ai.start = () => { if (ai.state === "idle") begin(); };
+
+    // Lazy load: most visitors never touch the terminal, so only start the
+    // download when one gets close to it (scroll near it, or hover/click the
+    // launcher, or focus the input). Rules answer in the meantime.
+    const arm = () => ai.start();
+    const terminal = document.getElementById("terminal");
+    if (terminal && "IntersectionObserver" in window) {
+      new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) arm();
+      }, { rootMargin: "300px" }).observe(terminal);
+    }
+    const launcher = document.getElementById("termLauncher");
+    ["pointerenter", "focus", "click"].forEach(ev => launcher && launcher.addEventListener(ev, arm, { once: true }));
+    const input = document.getElementById("termInput");
+    if (input) input.addEventListener("focus", arm, { once: true });
   };
 
-  if (document.readyState === "complete") start();
-  else window.addEventListener("load", start, { once: true });
+  if (document.readyState === "complete") init();
+  else window.addEventListener("load", init, { once: true });
 })();
