@@ -50,9 +50,27 @@
 
   // Casual chat should contain no numbers and no proper nouns except our own names.
   const CHAT_CAPS = new Set(["i", "i'm", "i'll", "i've", "i'd", "aethershell", "aethershell-lite", "anant", "khanna"]);
+  // Every name in FACTS (Agriprix, AMD, UBC, Stripe, ...), derived automatically
+  // so it can never go stale: a word counts as a name if it has a capital that is
+  // not just a sentence start. Matched case-insensitively, since the model writes
+  // in lowercase. Our own names stay allowed.
+  const FACT_NAMES = (() => {
+    const names = new Set();
+    for (const [, text] of FACTS) {
+      for (const m of text.matchAll(/[A-Za-z0-9+#][A-Za-z0-9+#.'-]*/g)) {
+        const w = m[0].replace(/[.'-]+$/, "");
+        const sentenceStart = /(^|[.!?]\s+)$/.test(text.slice(0, m.index));
+        if (/[A-Z]/.test(w.slice(1)) || (/^[A-Z]/.test(w) && !sentenceStart)) names.add(w.toLowerCase());
+      }
+    }
+    ["anant", "khanna", "aethershell", "aethershell-lite", "i"].forEach(n => names.delete(n));
+    return names;
+  })();
+
   const chatSafe = text => {
     const t = String(text).trim();
     if (!t || t.length > 220 || /\d/.test(t)) return false;
+    if ((t.toLowerCase().match(/[a-z0-9+#]+/g) || []).some(w => FACT_NAMES.has(w))) return false;
     const stripped = t.replace(/(^|[.!?]\s+)([A-Z])/g, (_, a, b) => a + b.toLowerCase());
     return !(stripped.match(/\b[A-Z][A-Za-z'-]*/g) || []).some(w => !CHAT_CAPS.has(w.toLowerCase()));
   };
